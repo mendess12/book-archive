@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1029308063943",
+    "project_id": "book-archive-772e7",
+    "storage_bucket": "book-archive-772e7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1029308063943:android:1ef75d533313b8fa281ee2",
+        "android_client_info": {
+          "package_name": "com.example.bookarchice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1029308063943-aefjbr7lq48u938kl2dqvpl65s5lskfc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfnBiVhJrJvku-CGB2WyfBmu4C4kwGIAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1029308063943-aefjbr7lq48u938kl2dqvpl65s5lskfc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
