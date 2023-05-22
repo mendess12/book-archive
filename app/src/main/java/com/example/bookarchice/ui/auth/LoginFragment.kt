@@ -28,6 +28,11 @@ class LoginFragment : Fragment() {
             val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
             Navigation.findNavController(view).navigate(action)
         }
+
+        binding.loginScreenForgotPasswordTv.setOnClickListener {
+            val action = LoginFragmentDirections.actionLoginFragmentToForgotPasswordFragment()
+            Navigation.findNavController(view).navigate(action)
+        }
     }
 
 }
