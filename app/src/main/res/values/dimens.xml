@@ -22,6 +22,7 @@
     <dimen name="width_32dp">32dp</dimen>
 
     <!-- height size -->
+    <dimen name="height_1dp">1dp</dimen>
     <dimen name="height_32dp">32dp</dimen>
 
     <!-- radius size -->
