@@ -2,14 +2,18 @@
 <resources>
 
     <!-- margin size -->
+    <dimen name="margin_0dp">0dp</dimen>
+    <dimen name="margin_10dp">10dp</dimen>
     <dimen name="margin_16dp">16dp</dimen>
     <dimen name="margin_24dp">24dp</dimen>
     <dimen name="margin_32dp">32dp</dimen>
+    <dimen name="margin_48dp">48dp</dimen>
     <dimen name="margin_64dp">64dp</dimen>
 
     <!-- text size -->
     <dimen name="text_size_16sp">16sp</dimen>
     <dimen name="text_size_20sp">20sp</dimen>
+    <dimen name="text_size_24sp">24sp</dimen>
     <dimen name="text_size_32sp">32sp</dimen>
 
     <!-- padding -->

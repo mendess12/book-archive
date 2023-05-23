@@ -28,4 +28,12 @@
         <item name="android:textColor">@color/text_color</item>
         <item name="android:fontFamily">@font/inter_regular</item>
     </style>
+
+    <style name="regular_24sp" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_size_24sp</item>
+        <item name="android:padding">@dimen/padding_8dp</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:fontFamily">@font/inter_regular</item>
+    </style>
+
 </resources>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BookArchice</string>
+    <string name="app_name">Book Archive</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="reset_password">Reset Password</string>
@@ -7,5 +7,8 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="user_name">User name</string>
+    <string name="book_name">Book Name</string>
+    <string name="book_author">Book Author</string>
+    <string name="page_number">Page Number</string>
 
 </resources>
