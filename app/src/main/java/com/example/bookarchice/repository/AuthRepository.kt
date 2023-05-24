@@ -39,4 +39,20 @@ class AuthRepository {
             Log.e("Error register", it.toString())
         }
     }
+
+    fun forgotPassword(email: String, forgotPasswordLiveData: MutableLiveData<String>) {
+        auth = FirebaseAuth.getInstance()
+
+        auth.sendPasswordResetEmail(email).addOnCompleteListener {
+            if (it.isSuccessful) {
+                forgotPasswordLiveData.postValue(it.toString())
+            } else {
+                Log.e("Error forgot password", it.exception.toString())
+                forgotPasswordLiveData.postValue(null)
+            }
+        }.addOnFailureListener {
+            forgotPasswordLiveData.postValue(null)
+            Log.e("Error forgot password", it.toString())
+        }
+    }
 }
