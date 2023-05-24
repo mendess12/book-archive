@@ -8,7 +8,7 @@ class AuthRepository {
 
     private lateinit var auth: FirebaseAuth
 
-    fun getLoginData(email: String, password: String, loginLiveData: MutableLiveData<String>) {
+    fun login(email: String, password: String, loginLiveData: MutableLiveData<String>) {
         auth = FirebaseAuth.getInstance()
 
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
@@ -21,6 +21,22 @@ class AuthRepository {
         }.addOnFailureListener {
             loginLiveData.postValue(null)
             Log.e("Error login", it.toString())
+        }
+    }
+
+    fun register(email: String, password: String, registerLiveData: MutableLiveData<String>) {
+        auth = FirebaseAuth.getInstance()
+
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
+            if (it.isSuccessful) {
+                registerLiveData.postValue(it.toString())
+            } else {
+                Log.e("Error register", it.exception.toString())
+                registerLiveData.postValue(null)
+            }
+        }.addOnFailureListener {
+            registerLiveData.postValue(null)
+            Log.e("Error register", it.toString())
         }
     }
 }
