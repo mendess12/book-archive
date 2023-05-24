@@ -11,5 +11,5 @@ class LoginViewModel : ViewModel() {
     var email: String = ""
     var password: String = ""
 
-    fun getLoginDataFromRepository() = authRepository.getLoginData(email, password, loginLiveData)
+    fun getLoginDataFromRepository() = authRepository.login(email, password, loginLiveData)
 }
