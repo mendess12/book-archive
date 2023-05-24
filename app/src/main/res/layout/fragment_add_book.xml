@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/screen_background"
+    tools:context=".ui.home.AddBookFragment">
+
+    <include
+        android:id="@+id/add_book_screen_tool_bar"
+        layout="@layout/back_tool_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/add_book_screen_book_name"
+        style="@style/medium_20sp"
+        android:layout_width="@dimen/width_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_32dp"
+        android:layout_marginTop="@dimen/margin_48dp"
+        android:layout_marginRight="@dimen/margin_32dp"
+        android:background="@drawable/edit_text_background"
+        android:hint="@string/book_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_book_screen_tool_bar" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/add_book_screen_book_author"
+        style="@style/medium_20sp"
+        android:layout_width="@dimen/width_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_32dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:layout_marginRight="@dimen/margin_32dp"
+        android:background="@drawable/edit_text_background"
+        android:hint="@string/book_author"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_book_screen_book_name" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/add_book_screen_page_number"
+        style="@style/medium_20sp"
+        android:layout_width="@dimen/width_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_32dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:layout_marginRight="@dimen/margin_32dp"
+        android:background="@drawable/edit_text_background"
+        android:hint="@string/page_number"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_book_screen_book_author" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/add_book_screen_book_type"
+        style="@style/medium_20sp"
+        android:layout_width="@dimen/width_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_32dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:layout_marginRight="@dimen/margin_32dp"
+        android:background="@drawable/edit_text_background"
+        android:hint="@string/book_type"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_book_screen_page_number" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/add_book_screen_book_language"
+        style="@style/medium_20sp"
+        android:layout_width="@dimen/width_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_32dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:layout_marginRight="@dimen/margin_32dp"
+        android:background="@drawable/edit_text_background"
+        android:hint="@string/book_language"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_book_screen_book_type" />
+
+    <Button
+        android:id="@+id/add_book_screen_add_button"
+        style="@style/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/margin_64dp"
+        android:layout_marginLeft="@dimen/margin_64dp"
+        android:layout_marginBottom="@dimen/margin_64dp"
+        android:backgroundTint="@color/button_background_color"
+        android:text="@string/add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+         />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
