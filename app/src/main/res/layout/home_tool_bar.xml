@@ -6,7 +6,7 @@
     android:background="@color/screen_background">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/home_back_tool_Bar"
+        android:id="@+id/home_tool_Bar_profile"
         android:layout_width="@dimen/margin_48dp"
         android:layout_height="@dimen/margin_48dp"
         android:layout_marginEnd="@dimen/margin_24dp"
@@ -25,7 +25,7 @@
         android:gravity="center"
         android:text="@string/app_name"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/home_back_tool_Bar"
+        app:layout_constraintEnd_toStartOf="@+id/home_tool_Bar_profile"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,6 +37,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_back_tool_Bar" />
+        app:layout_constraintTop_toBottomOf="@+id/home_tool_Bar_profile" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
