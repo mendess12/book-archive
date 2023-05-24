@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import com.example.bookarchice.R
 import com.example.bookarchice.databinding.FragmentHomeBinding
 
@@ -22,6 +23,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
+
+        binding.homeScreenAddButton.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToAddBookFragment()
+            Navigation.findNavController(view).navigate(action)
+        }
     }
 
 }
