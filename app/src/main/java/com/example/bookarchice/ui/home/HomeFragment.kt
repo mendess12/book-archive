@@ -28,6 +28,11 @@ class HomeFragment : Fragment() {
             val action = HomeFragmentDirections.actionHomeFragmentToAddBookFragment()
             Navigation.findNavController(view).navigate(action)
         }
+
+        binding.homeScreenToolBar.homeToolBarProfile.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToChangePasswordFragment()
+            Navigation.findNavController(view).navigate(action)
+        }
     }
 
 }
