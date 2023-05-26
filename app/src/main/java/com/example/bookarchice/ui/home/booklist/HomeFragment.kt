@@ -1,4 +1,4 @@
-package com.example.bookarchice.ui.home
+package com.example.bookarchice.ui.home.booklist
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

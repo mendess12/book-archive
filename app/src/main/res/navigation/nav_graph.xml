@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.bookarchice.ui.home.HomeFragment"
+        android:name="com.example.bookarchice.ui.home.booklist.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -52,9 +52,13 @@
     </fragment>
     <fragment
         android:id="@+id/addBookFragment"
-        android:name="com.example.bookarchice.ui.home.AddBookFragment"
+        android:name="com.example.bookarchice.ui.home.addbook.AddBookFragment"
         android:label="fragment_add_book"
-        tools:layout="@layout/fragment_add_book" />
+        tools:layout="@layout/fragment_add_book" >
+        <action
+            android:id="@+id/action_addBookFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/changePasswordFragment"
         android:name="com.example.bookarchice.ui.profile.ChangePasswordFragment"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/screen_background"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".ui.home.booklist.HomeFragment">
 
     <include
         android:id="@+id/home_screen_tool_bar"
