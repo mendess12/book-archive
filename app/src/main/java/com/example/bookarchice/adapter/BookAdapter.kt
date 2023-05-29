@@ -15,8 +15,8 @@ class BookAdapter(private val bookList: List<Book>) :
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var bookName: TextView = view.findViewById(R.id.recycler_item_book_name)
         var bookAuthor: TextView = view.findViewById(R.id.recycler_item_book_author)
-        var pageNumber: TextView = view.findViewById(R.id.recycler_item_page_number)
-        var bookType: TextView = view.findViewById(R.id.recycler_item_page_number)
+        var pageNumber: TextView = view.findViewById(R.id.recycler_item_book_page_number)
+        var bookType: TextView = view.findViewById(R.id.recycler_item_book_type)
         var bookLanguage: TextView = view.findViewById(R.id.recycler_item_book_language)
         var constraintLayout: ConstraintLayout = itemView.findViewById(R.id.constraint_one)
         var expandableLayout: ConstraintLayout = itemView.findViewById(R.id.constraint_two)
