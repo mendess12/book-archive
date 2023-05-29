@@ -7,4 +7,6 @@ data class Book(
     var bookType: String?,
     var bookLanguage: String?,
     var userId: String
-)
+){
+    var expandable : Boolean = false
+}

@@ -9,6 +9,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 class HomeRepository {
 
     private lateinit var database: FirebaseFirestore
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+
 
     fun addBookData(
         name: String,
@@ -35,5 +37,32 @@ class HomeRepository {
             addLiveData.postValue(null)
             Log.e("Add book failed message", it.toString())
         }
+    }
+
+    fun getBookList(
+        bookListLiveData: MutableLiveData<List<Book>>
+    ) {
+        database = FirebaseFirestore.getInstance()
+        val uid = auth.currentUser?.uid
+
+        database.collection("Books").whereEqualTo("userId", uid).get().addOnSuccessListener {
+            val bookList = mutableListOf<Book>()
+            for (document in it) {
+                val name = document.getString("bookName")
+                val author = document.getString("bookAuthor")
+                val pageNumber = document.getString("pageNumber")
+                val type = document.getString("bookType")
+                val language = document.getString("bookLanguage")
+                val userId = document.getString("userId")
+
+                bookList.add(Book(name, author, pageNumber, type, language, userId.toString()))
+            }
+            bookListLiveData.value = bookList
+        }.addOnFailureListener {
+            bookListLiveData.value = null
+            Log.e("Failed message", it.message.toString())
+        }
+
+
     }
 }
