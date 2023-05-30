@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.bookarchice.R
 import com.example.bookarchice.databinding.FragmentRegisterBinding
 import com.google.android.material.snackbar.Snackbar
@@ -71,7 +72,7 @@ class RegisterFragment : Fragment() {
         viewModel.registerLiveData.observe(viewLifecycleOwner) {
             if (it != null) {
                 val action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
-                Navigation.findNavController(requireView()).navigate(action)
+                findNavController().navigate(action)
             } else {
                 Snackbar.make(
                     requireView(),

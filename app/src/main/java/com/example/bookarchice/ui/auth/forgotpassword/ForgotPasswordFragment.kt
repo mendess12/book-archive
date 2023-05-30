@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.bookarchice.R
 import com.example.bookarchice.databinding.FragmentForgotPasswordBinding
@@ -66,7 +65,7 @@ class ForgotPasswordFragment : Fragment() {
                     .show()
                 val action =
                     ForgotPasswordFragmentDirections.actionForgotPasswordFragmentToLoginFragment()
-                Navigation.findNavController(requireView()).navigate(action)
+                findNavController().navigate(action)
             } else {
                 Snackbar.make(requireView(), "Check your email", Snackbar.LENGTH_LONG)
                     .show()

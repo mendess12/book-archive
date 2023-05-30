@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.bookarchice.R
 import com.example.bookarchice.databinding.FragmentLoginBinding
 import com.google.android.material.snackbar.Snackbar
@@ -61,6 +62,7 @@ class LoginFragment : Fragment() {
                     return@setOnClickListener
                 }
                 observeLiveData()
+                viewModel.getLoginDataFromRepository()
             }
         }
     }
@@ -69,12 +71,11 @@ class LoginFragment : Fragment() {
         viewModel.loginLiveData.observe(viewLifecycleOwner) {
             if (it != null) {
                 val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
-                Navigation.findNavController(requireView()).navigate(action)
+                findNavController().navigate(action)
             } else {
                 Snackbar.make(requireView(), "Check your email and password!", Snackbar.LENGTH_LONG)
                     .show()
             }
         }
-        viewModel.getLoginDataFromRepository()
     }
 }
