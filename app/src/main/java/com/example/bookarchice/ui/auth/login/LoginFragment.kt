@@ -12,11 +12,13 @@ import androidx.navigation.fragment.findNavController
 import com.example.bookarchice.R
 import com.example.bookarchice.databinding.FragmentLoginBinding
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private val viewModel: LoginViewModel by viewModels()
+    private var auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +31,10 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLoginBinding.bind(view)
 
+        if (auth.currentUser != null) {
+            val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+            findNavController().navigate(action)
+        }
         setOnClickMethod()
     }
 
