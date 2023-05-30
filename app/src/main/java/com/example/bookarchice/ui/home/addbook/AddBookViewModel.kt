@@ -12,7 +12,20 @@ class AddBookViewModel : ViewModel() {
     var pageNumber: String = ""
     var language: String = ""
     var type: String = ""
+    var publisher: String = ""
+    var message: String = ""
+    var date: String = ""
     var addLiveData = MutableLiveData<String>()
 
-    fun addBookDataFromFirebase() = homeRepository.addBookData(name,author,pageNumber,type,language, addLiveData)
+    fun addBookDataFromFirebase() = homeRepository.addBookData(
+        name,
+        author,
+        pageNumber,
+        type,
+        language,
+        publisher,
+        message,
+        date,
+        addLiveData
+    )
 }

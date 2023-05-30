@@ -11,20 +11,31 @@ class HomeRepository {
     private lateinit var database: FirebaseFirestore
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
-
     fun addBookData(
         name: String,
         author: String,
         pageNumber: String,
         type: String,
         language: String,
+        publisher: String,
+        message: String,
+        date: String,
         addLiveData: MutableLiveData<String>
     ) {
         val uuid = FirebaseAuth.getInstance().currentUser?.uid
         database = FirebaseFirestore.getInstance()
 
-        val book = Book(name, author, pageNumber, type, language, uuid.toString())
-
+        val book = Book(
+            name,
+            author,
+            pageNumber,
+            type,
+            language,
+            publisher,
+            message,
+            date,
+            uuid.toString()
+        )
         database.collection("Books").add(book).addOnCompleteListener {
             if (it.isSuccessful) {
                 addLiveData.postValue("not null")
@@ -53,16 +64,29 @@ class HomeRepository {
                 val pageNumber = document.getString("pageNumber")
                 val type = document.getString("bookType")
                 val language = document.getString("bookLanguage")
+                val publisher = document.getString("bookPublisher")
+                val message = document.getString("bookMessage")
+                val date = document.getString("bookDate")
                 val userId = document.getString("userId")
 
-                bookList.add(Book(name, author, pageNumber, type, language, userId.toString()))
+                bookList.add(
+                    Book(
+                        name,
+                        author,
+                        pageNumber,
+                        type,
+                        language,
+                        publisher,
+                        message,
+                        date,
+                        userId.toString()
+                    )
+                )
             }
             bookListLiveData.value = bookList
         }.addOnFailureListener {
             bookListLiveData.value = null
             Log.e("Failed message", it.message.toString())
         }
-
-
     }
 }

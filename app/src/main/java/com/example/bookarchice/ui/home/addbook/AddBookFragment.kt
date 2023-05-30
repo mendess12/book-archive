@@ -27,7 +27,6 @@ class AddBookFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAddBookBinding.bind(view)
 
-
         binding.addBookScreenAddButton.setOnClickListener {
             setBookData()
             observeLiveData()
@@ -45,6 +44,9 @@ class AddBookFragment : Fragment() {
             pageNumber = binding.addBookScreenPageNumber.text.toString()
             type = binding.addBookScreenBookType.text.toString()
             language = binding.addBookScreenBookLanguage.text.toString()
+            publisher = binding.addBookScreenBookPublisher.text.toString()
+            message = binding.addBookScreenBookMessage.text.toString()
+            date = binding.addBookScreenBookDate.text.toString()
         }
     }
 
