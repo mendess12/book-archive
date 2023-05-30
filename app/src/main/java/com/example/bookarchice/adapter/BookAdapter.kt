@@ -18,6 +18,9 @@ class BookAdapter(private val bookList: List<Book>) :
         var pageNumber: TextView = view.findViewById(R.id.recycler_item_book_page_number)
         var bookType: TextView = view.findViewById(R.id.recycler_item_book_type)
         var bookLanguage: TextView = view.findViewById(R.id.recycler_item_book_language)
+        var bookPublisher: TextView = view.findViewById(R.id.recycler_item_book_publishing_house)
+        var bookMessage: TextView = view.findViewById(R.id.recycler_item_book_message)
+        var bookDate: TextView = view.findViewById(R.id.recycler_item_date)
         var constraintLayout: ConstraintLayout = itemView.findViewById(R.id.constraint_one)
         var expandableLayout: ConstraintLayout = itemView.findViewById(R.id.constraint_two)
 
@@ -40,6 +43,9 @@ class BookAdapter(private val bookList: List<Book>) :
         holder.pageNumber.text = book.pageNumber
         holder.bookType.text = book.bookType
         holder.bookLanguage.text = book.bookLanguage
+        holder.bookPublisher.text = book.bookPublisher
+        holder.bookMessage.text = book.bookMessage
+        holder.bookDate.text = book.bookDate
 
         val isExpandable = book.expandable
         holder.expandableLayout.visibility = if (isExpandable) View.VISIBLE else View.GONE

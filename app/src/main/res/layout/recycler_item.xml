@@ -16,14 +16,40 @@
 
         <TextView
             android:id="@+id/recycler_item_book_name"
-            style="@style/regular_24sp"
+            style="@style/medium_20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/book_name"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/recycler_item_book_author"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/recycler_item_book_author"
+            style="@style/medium_20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/book_author"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/recycler_item_book_type"
+            app:layout_constraintStart_toEndOf="@+id/recycler_item_book_name"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/recycler_item_book_type"
+            style="@style/medium_20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/book_type"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/recycler_item_book_author"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,33 +57,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraint_one">
 
-        <TextView
-            android:id="@+id/recycler_item_book_author"
-            style="@style/medium_16sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_10dp"
-            android:gravity="center"
-            android:text="@string/book_author"
-            app:layout_constraintEnd_toStartOf="@+id/recycler_item_book_type"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/recycler_item_book_type"
-            style="@style/medium_16sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_10dp"
-            android:gravity="center"
-            android:text="@string/book_type"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/recycler_item_book_author"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/recycler_item_book_language"
@@ -68,10 +73,10 @@
             android:layout_marginBottom="@dimen/margin_10dp"
             android:gravity="center"
             android:text="@string/book_language"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/recycler_item_book_author"
-            app:layout_constraintStart_toStartOf="@+id/recycler_item_book_author"
-            app:layout_constraintTop_toBottomOf="@id/recycler_item_book_author" />
+
+            app:layout_constraintEnd_toStartOf="@+id/recycler_item_book_page_number"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/recycler_item_book_page_number"
@@ -82,10 +87,47 @@
             android:layout_marginBottom="@dimen/margin_10dp"
             android:gravity="center"
             android:text="@string/page_number"
+            app:layout_constraintEnd_toStartOf="@+id/recycler_item_book_publishing_house"
+            app:layout_constraintStart_toEndOf="@+id/recycler_item_book_language"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/recycler_item_book_publishing_house"
+            style="@style/medium_16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_marginBottom="@dimen/margin_10dp"
+            android:gravity="center"
+            android:text="@string/book_publishing_house"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/recycler_item_book_page_number"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/recycler_item_book_message"
+            style="@style/medium_16sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_10dp"
+            android:text="@string/book_message"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recycler_item_book_page_number" />
+
+        <TextView
+            android:id="@+id/recycler_item_date"
+            style="@style/medium_16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_10dp"
+            android:text="@string/book_message"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/recycler_item_book_type"
-            app:layout_constraintStart_toStartOf="@+id/recycler_item_book_type"
-            app:layout_constraintTop_toBottomOf="@id/recycler_item_book_type" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recycler_item_book_message" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View

@@ -6,7 +6,10 @@ data class Book(
     var pageNumber: String?,
     var bookType: String?,
     var bookLanguage: String?,
+    var bookPublisher: String?,
+    var bookMessage: String?,
+    var bookDate: String?,
     var userId: String
-){
-    var expandable : Boolean = false
+) {
+    var expandable: Boolean = false
 }

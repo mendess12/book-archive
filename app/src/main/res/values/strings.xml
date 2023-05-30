@@ -14,6 +14,9 @@
     <string name="page_number">Page Number</string>
     <string name="book_type">Book Type</string>
     <string name="book_language">Book Language</string>
+    <string name="book_publishing_house">Publisher</string>
+    <string name="book_message">Message about the book</string>
+    <string name="date">Date</string>
     <string name="add">Add</string>
     <string name="change">Change</string>
 </resources>
