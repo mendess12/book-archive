@@ -5,19 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookarchice.R
 import com.example.bookarchice.adapter.BookAdapter
 import com.example.bookarchice.databinding.FragmentHomeBinding
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var bookAdapter: BookAdapter
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,8 +45,7 @@ class HomeFragment : Fragment() {
         }
 
         binding.homeScreenToolBar.homeToolBarProfile.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToChangePasswordFragment()
-            Navigation.findNavController(view).navigate(action)
+            getPopupMenu()
         }
     }
 
@@ -59,4 +62,29 @@ class HomeFragment : Fragment() {
         viewModel.getBookDataFromRepository()
     }
 
+    private fun getPopupMenu() {
+        val popup = PopupMenu(requireContext(), binding.homeScreenToolBar.homeToolBarProfile)
+        popup.menuInflater.inflate(R.menu.home_menu, popup.menu)
+        popup.show()
+
+        popup.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.action_change_password -> {
+                    val action =
+                        HomeFragmentDirections.actionHomeFragmentToChangePasswordFragment()
+                    findNavController().navigate(action)
+                    true
+                }
+
+                R.id.action_sign_out -> {
+                    val action = HomeFragmentDirections.actionHomeFragmentToLoginFragment()
+                    findNavController().navigate(action)
+                    auth.signOut()
+                    true
+                }
+
+                else -> false
+            }
+        }
+    }
 }
