@@ -11,7 +11,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.bookarchice.R
 import com.example.bookarchice.databinding.FragmentRegisterBinding
-import com.google.android.material.snackbar.Snackbar
+import com.example.bookarchice.util.showSnackBar
 
 class RegisterFragment : Fragment() {
 
@@ -74,12 +74,7 @@ class RegisterFragment : Fragment() {
                 val action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
                 findNavController().navigate(action)
             } else {
-                Snackbar.make(
-                    requireView(),
-                    "Check your email, password and user name!",
-                    Snackbar.LENGTH_LONG
-                )
-                    .show()
+                view?.showSnackBar("Check your email, password and user name!")
             }
         }
         viewModel.getRegisterDataFromRepository()

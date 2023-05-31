@@ -11,7 +11,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.bookarchice.R
 import com.example.bookarchice.databinding.FragmentLoginBinding
-import com.google.android.material.snackbar.Snackbar
+import com.example.bookarchice.util.showSnackBar
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginFragment : Fragment() {
@@ -79,8 +79,7 @@ class LoginFragment : Fragment() {
                 val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
                 findNavController().navigate(action)
             } else {
-                Snackbar.make(requireView(), "Check your email and password!", Snackbar.LENGTH_LONG)
-                    .show()
+                view?.showSnackBar("Check your email and password!")
             }
         }
     }

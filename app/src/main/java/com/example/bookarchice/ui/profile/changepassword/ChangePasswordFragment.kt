@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.bookarchice.R
 import com.example.bookarchice.databinding.FragmentChangePasswordBinding
-import com.google.android.material.snackbar.Snackbar
+import com.example.bookarchice.util.showSnackBar
 import com.google.firebase.auth.FirebaseAuth
 
 class ChangePasswordFragment : Fragment() {
@@ -53,11 +53,7 @@ class ChangePasswordFragment : Fragment() {
                 return@setOnClickListener
             }
             if (viewModel.newPassword != retypeNewPassword) {
-                Snackbar.make(
-                    requireView(),
-                    "New password and retype new password not same!",
-                    Snackbar.LENGTH_LONG
-                ).show()
+                view.showSnackBar("New password and retype new password not same!")
                 return@setOnClickListener
             }
             viewModel.getChangePasswordDataFromRepository()
@@ -77,11 +73,7 @@ class ChangePasswordFragment : Fragment() {
                 findNavController().navigate(action)
                 auth.signOut()
             } else {
-                Snackbar.make(
-                    requireView(),
-                    "Check your password,new password and retype new password",
-                    Snackbar.LENGTH_LONG
-                ).show()
+                view?.showSnackBar("Check your password,new password and retype new password")
             }
         }
     }

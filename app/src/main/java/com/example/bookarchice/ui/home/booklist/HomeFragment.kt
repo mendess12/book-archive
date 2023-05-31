@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookarchice.R
 import com.example.bookarchice.adapter.BookAdapter
 import com.example.bookarchice.databinding.FragmentHomeBinding
-import com.google.android.material.snackbar.Snackbar
+import com.example.bookarchice.util.showSnackBar
 import com.google.firebase.auth.FirebaseAuth
 
 class HomeFragment : Fragment() {
@@ -56,7 +56,7 @@ class HomeFragment : Fragment() {
                 binding.recyclerView.adapter = bookAdapter
                 bookAdapter.notifyDataSetChanged()
             } else {
-                Snackbar.make(requireView(), "BookList is null", Snackbar.LENGTH_LONG).show()
+                view?.showSnackBar("BookList is null")
             }
         }
         viewModel.getBookDataFromRepository()

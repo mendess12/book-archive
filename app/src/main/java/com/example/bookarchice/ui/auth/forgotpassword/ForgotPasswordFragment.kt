@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.bookarchice.R
 import com.example.bookarchice.databinding.FragmentForgotPasswordBinding
-import com.google.android.material.snackbar.Snackbar
+import com.example.bookarchice.util.showSnackBar
 
 class ForgotPasswordFragment : Fragment() {
 
@@ -57,18 +57,12 @@ class ForgotPasswordFragment : Fragment() {
     private fun observeLiveData() {
         viewModel.forgotPasswordLiveData.observe(viewLifecycleOwner) {
             if (it != null) {
-                Snackbar.make(
-                    requireView(),
-                    "Link sent to ${viewModel.email} this email. Please check your email!",
-                    Snackbar.LENGTH_LONG
-                )
-                    .show()
+                view?.showSnackBar("Link sent to ${viewModel.email} this email. Please check your email!")
                 val action =
                     ForgotPasswordFragmentDirections.actionForgotPasswordFragmentToLoginFragment()
                 findNavController().navigate(action)
             } else {
-                Snackbar.make(requireView(), "Check your email", Snackbar.LENGTH_LONG)
-                    .show()
+                view?.showSnackBar("Check your email")
             }
         }
         viewModel.getForgotPasswordDataFromRepository()

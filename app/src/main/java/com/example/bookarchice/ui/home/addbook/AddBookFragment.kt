@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.bookarchice.R
 import com.example.bookarchice.databinding.FragmentAddBookBinding
-import com.google.android.material.snackbar.Snackbar
+import com.example.bookarchice.util.showSnackBar
 
 class AddBookFragment : Fragment() {
 
@@ -56,12 +56,7 @@ class AddBookFragment : Fragment() {
                 val action = AddBookFragmentDirections.actionAddBookFragmentToHomeFragment()
                 findNavController().navigate(action)
             } else {
-                Snackbar.make(
-                    requireView(),
-                    "Failed!",
-                    Snackbar.LENGTH_LONG
-                )
-                    .show()
+                view?.showSnackBar("Failed!")
             }
         }
         viewModel.addBookDataFromFirebase()
