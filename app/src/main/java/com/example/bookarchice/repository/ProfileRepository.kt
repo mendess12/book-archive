@@ -1,7 +1,7 @@
 package com.example.bookarchice.repository
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.example.bookarchice.util.logDebug
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 
@@ -20,7 +20,7 @@ class ProfileRepository {
 
             user.reauthenticate(credential).addOnCompleteListener {
                 if (it.isSuccessful) {
-                    Log.e("User Message", "Re-Authentication success")
+                    logDebug("User Message", "Re-Authentication success")
 
                     user.updatePassword(newPassword).addOnCompleteListener {
                         if (it.isSuccessful) {
@@ -30,10 +30,10 @@ class ProfileRepository {
                         }
                     }.addOnFailureListener {
                         changePasswordLiveData.postValue(null)
-                        Log.e("Change password failed message", it.message.toString())
+                        logDebug("Change password failed message", it.message.toString())
                     }
                 } else {
-                    Log.e("Re-authenticate message failed", it.exception.toString())
+                    logDebug("Re-authenticate message failed", it.exception.toString())
                     changePasswordLiveData.postValue(null)
                 }
             }

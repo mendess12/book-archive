@@ -1,12 +1,15 @@
 package com.example.bookarchice.repository
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.example.bookarchice.util.logDebug
 import com.google.firebase.auth.FirebaseAuth
 
 class AuthRepository {
 
     private lateinit var auth: FirebaseAuth
+    private val loginLogTitle = "Error Login"
+    private val registerLogTitle = "Error Register"
+    private val forgotPasswordLogTitle = "Error Forgot Password"
 
     fun login(email: String, password: String, loginLiveData: MutableLiveData<String>) {
         auth = FirebaseAuth.getInstance()
@@ -15,12 +18,12 @@ class AuthRepository {
             if (it.isSuccessful) {
                 loginLiveData.postValue(it.toString())
             } else {
-                Log.e("Error login", it.exception.toString())
+                logDebug(loginLogTitle, it.exception.toString())
                 loginLiveData.postValue(null)
             }
         }.addOnFailureListener {
             loginLiveData.postValue(null)
-            Log.e("Error login", it.toString())
+            logDebug(loginLogTitle, it.localizedMessage!!)
         }
     }
 
@@ -31,12 +34,12 @@ class AuthRepository {
             if (it.isSuccessful) {
                 registerLiveData.postValue(it.toString())
             } else {
-                Log.e("Error register", it.exception.toString())
+                logDebug(registerLogTitle, it.exception.toString())
                 registerLiveData.postValue(null)
             }
         }.addOnFailureListener {
             registerLiveData.postValue(null)
-            Log.e("Error register", it.toString())
+            logDebug(registerLogTitle, it.localizedMessage!!)
         }
     }
 
@@ -47,12 +50,12 @@ class AuthRepository {
             if (it.isSuccessful) {
                 forgotPasswordLiveData.postValue(it.toString())
             } else {
-                Log.e("Error forgot password", it.exception.toString())
+                logDebug(forgotPasswordLogTitle, it.exception.toString())
                 forgotPasswordLiveData.postValue(null)
             }
         }.addOnFailureListener {
             forgotPasswordLiveData.postValue(null)
-            Log.e("Error forgot password", it.toString())
+            logDebug(forgotPasswordLogTitle, it.localizedMessage!!)
         }
     }
 }
