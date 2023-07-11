@@ -1,5 +1,7 @@
 package com.example.bookarchice.model
 
+import java.io.Serializable
+
 data class Book(
     var bookName: String?,
     var bookAuthor: String?,
@@ -10,6 +12,4 @@ data class Book(
     var bookMessage: String?,
     var bookDate: String?,
     var userId: String
-) {
-    var expandable: Boolean = false
-}
+) : Serializable

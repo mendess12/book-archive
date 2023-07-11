@@ -42,7 +42,7 @@
         android:id="@+id/homeFragment"
         android:name="com.example.bookarchice.ui.home.booklist.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_addBookFragment"
             app:destination="@id/addBookFragment" />
@@ -57,16 +57,21 @@
         android:id="@+id/addBookFragment"
         android:name="com.example.bookarchice.ui.home.addbook.AddBookFragment"
         android:label="fragment_add_book"
-        tools:layout="@layout/fragment_add_book" >
+        tools:layout="@layout/fragment_add_book">
         <action
             android:id="@+id/action_addBookFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="book"
+            android:defaultValue="@null"
+            app:argType="com.example.bookarchice.model.Book"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/changePasswordFragment"
         android:name="com.example.bookarchice.ui.profile.changepassword.ChangePasswordFragment"
         android:label="fragment_change_password"
-        tools:layout="@layout/fragment_change_password" >
+        tools:layout="@layout/fragment_change_password">
         <action
             android:id="@+id/action_changePasswordFragment_to_loginFragment"
             app:destination="@id/loginFragment" />

@@ -13,10 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookarchice.R
 import com.example.bookarchice.adapter.BookAdapter
 import com.example.bookarchice.databinding.FragmentHomeBinding
+import com.example.bookarchice.model.Book
 import com.example.bookarchice.util.showSnackBar
 import com.google.firebase.auth.FirebaseAuth
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), BookAdapter.Listener {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeViewModel by viewModels()
@@ -34,7 +35,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
 
-        bookAdapter = BookAdapter(emptyList())
+        bookAdapter = BookAdapter(emptyList(), this@HomeFragment)
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = bookAdapter
         observeLiveData()
@@ -52,7 +53,7 @@ class HomeFragment : Fragment() {
     private fun observeLiveData() {
         viewModel.booksLiveData.observe(viewLifecycleOwner) {
             if (it != null) {
-                bookAdapter = BookAdapter(it)
+                bookAdapter = BookAdapter(it, this@HomeFragment)
                 binding.recyclerView.adapter = bookAdapter
                 bookAdapter.notifyDataSetChanged()
             } else {
@@ -86,5 +87,10 @@ class HomeFragment : Fragment() {
                 else -> false
             }
         }
+    }
+
+    override fun onItemClick(bookList: Book) {
+        val action = HomeFragmentDirections.actionHomeFragmentToAddBookFragment(bookList)
+        findNavController().navigate(action)
     }
 }
