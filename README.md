@@ -8,7 +8,9 @@
 1- Navigation component ile fragment kullanımı<br>
 2- Login,register,forgot password ve change password işlemleri için firebase authentication kullanımı<br>
 3- Kitap ekleme ve eklenen kitapları listeleme işlemleri için firebase firestore kullanımı<br>
-4- Kitap listesindeki item'lara tıklanınca o kitapın özelliklerini göstermek için expandable özelliği kullanımı
+4- Kitap listesindeki item'lara tıklanınca o kitapın detay özelliklerini göstermek için detay ekranına gitme işlemi<br>
+5- Kitap listesinde kitabın ismine göre arama yapma işlemi<br>
+6- Firebase'de bulunan en çok okunan kitapların listesini kullanıcılara önerme işlemi<br>
 <hr>
 
 ### Teknolojiler
@@ -16,6 +18,7 @@
 - Veri akışını yönetmek için LiveData, arayüz durumunun yönetimi için UIState<br>
 - Fragmentlar arası geçiş ve veri göndermek için Jetpack Navigation<br>
 - Listeleme işlemleri için RecyclerView<br>
+- Liste içinde arama işlemleri için Filterable<br>
 <hr>
 
 ### Dependencies 
@@ -63,7 +66,7 @@
 * [Activity lifecycle](https://developer.android.com/guide/components/activities/activity-lifecycle)
 * [ViewModel and ViewModel lifecycle](https://developer.android.com/topic/libraries/architecture/viewmodel)
 * [Learn Jetpack Navigation - Codelab](https://developer.android.com/codelabs/android-navigation#0)
-* [Expandable](https://medium.com/swlh/expandable-recycler-view-in-kotlin-41bca0bc80cf)
+* [Filterable](https://www.tutorialsbuzz.com/2020/09/android-recyclerView-data-list-filterable-kotlin.html)
 <hr>
 
 ### UI Tasarımları
