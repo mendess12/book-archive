@@ -48,6 +48,11 @@ class HomeFragment : Fragment(), BookAdapter.Listener {
         binding.homeScreenToolBar.homeToolBarProfile.setOnClickListener {
             getPopupMenu()
         }
+
+        binding.homeScreenToolBar.homeToolBarSuggestion.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToSuggestionBookFragment()
+            Navigation.findNavController(it).navigate(action)
+        }
     }
 
     private fun observeLiveData() {

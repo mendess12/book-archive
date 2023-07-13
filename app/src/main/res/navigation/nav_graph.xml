@@ -52,6 +52,9 @@
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_suggestionBookFragment"
+            app:destination="@id/suggestionBookFragment" />
     </fragment>
     <fragment
         android:id="@+id/addBookFragment"
@@ -76,4 +79,9 @@
             android:id="@+id/action_changePasswordFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/suggestionBookFragment"
+        android:name="com.example.bookarchice.ui.home.suggestion.SuggestionBookFragment"
+        android:label="fragment_suggestion_book"
+        tools:layout="@layout/fragment_suggestion_book" />
 </navigation>
