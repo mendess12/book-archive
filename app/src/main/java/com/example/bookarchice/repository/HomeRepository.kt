@@ -2,6 +2,7 @@ package com.example.bookarchice.repository
 
 import androidx.lifecycle.MutableLiveData
 import com.example.bookarchice.model.Book
+import com.example.bookarchice.model.SuggestionBook
 import com.example.bookarchice.util.logDebug
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -86,6 +87,35 @@ class HomeRepository {
             bookListLiveData.value = bookList
         }.addOnFailureListener {
             bookListLiveData.value = null
+            logDebug("Failed message", it.message.toString())
+        }
+    }
+
+    fun getSuggestionsList(
+        suggestionsListLiveData: MutableLiveData<List<SuggestionBook>>
+    ) {
+        database = FirebaseFirestore.getInstance()
+
+        database.collection("Suggestion").get().addOnSuccessListener {
+            val suggestionList = mutableListOf<SuggestionBook>()
+            for (document in it) {
+                val name = document.getString("name")
+                val author = document.getString("author")
+                val pageNumber = document.getString("subject")
+                val type = document.getString("type")
+
+                suggestionList.add(
+                    SuggestionBook(
+                        name,
+                        author,
+                        pageNumber,
+                        type
+                    )
+                )
+            }
+            suggestionsListLiveData.value = suggestionList
+        }.addOnFailureListener {
+            suggestionsListLiveData.value = null
             logDebug("Failed message", it.message.toString())
         }
     }
