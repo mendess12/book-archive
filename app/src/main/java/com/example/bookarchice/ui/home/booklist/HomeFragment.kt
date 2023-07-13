@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -35,9 +36,10 @@ class HomeFragment : Fragment(), BookAdapter.Listener {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
 
-        bookAdapter = BookAdapter(emptyList(), this@HomeFragment)
+        bookAdapter = BookAdapter(this@HomeFragment)
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = bookAdapter
+        searchView()
         observeLiveData()
 
         binding.homeScreenAddButton.setOnClickListener {
@@ -49,16 +51,32 @@ class HomeFragment : Fragment(), BookAdapter.Listener {
             getPopupMenu()
         }
 
-        binding.homeScreenToolBar.homeToolBarSuggestion.setOnClickListener {
+        binding.homeScreenToolBar.homeToolBarStarBook.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToSuggestionBookFragment()
             Navigation.findNavController(it).navigate(action)
         }
     }
 
+    private fun searchView() {
+        binding.homeScreenToolBar.homeToolBarSearchView.setOnQueryTextListener(object :
+            SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null) {
+                    bookAdapter.filter.filter(newText)
+                }
+                return true
+            }
+        })
+    }
+
     private fun observeLiveData() {
         viewModel.booksLiveData.observe(viewLifecycleOwner) {
             if (it != null) {
-                bookAdapter = BookAdapter(it, this@HomeFragment)
+                bookAdapter.updateData(it)
                 binding.recyclerView.adapter = bookAdapter
                 bookAdapter.notifyDataSetChanged()
             } else {

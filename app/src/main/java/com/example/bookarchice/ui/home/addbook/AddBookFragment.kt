@@ -39,6 +39,7 @@ class AddBookFragment : Fragment() {
             }
         } else {
             binding.apply {
+                binding.addBookScreenAddButton.visibility = View.INVISIBLE
                 addBookScreenBookName.setText(args.book?.bookName.toString())
                 binding.addBookScreenBookAuthor.setText(args.book?.bookAuthor)
                 addBookScreenPageNumber.setText(args.book?.pageNumber)
