@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="?android:attr/actionBarSize"
     android:background="@color/screen_background">
@@ -10,35 +9,33 @@
         android:id="@+id/home_tool_Bar_profile"
         android:layout_width="@dimen/margin_48dp"
         android:layout_height="@dimen/margin_48dp"
-        android:layout_marginEnd="@dimen/margin_24dp"
         android:src="@drawable/baseline_account_circle_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/home_name_tool_bar"
-        style="@style/regular_24sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_10dp"
-        android:layout_marginBottom="@dimen/margin_10dp"
-        android:gravity="center"
-        android:text="@string/app_name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/home_tool_bar_suggestion"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/home_tool_bar_suggestion"
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/home_tool_bar_search_view"
         style="@style/medium_16sp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/suggestion"
+        android:layout_height="@dimen/margin_0dp"
+        app:closeIcon="@drawable/baseline_close_24"
+        app:iconifiedByDefault="false"
         app:layout_constraintBottom_toTopOf="@+id/home_tool_bar_view"
+        app:layout_constraintEnd_toStartOf="@+id/home_tool_bar_star_book"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:queryHint="@string/search"
+        app:searchIcon="@drawable/baseline_search_24" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/home_tool_bar_star_book"
+        android:layout_width="@dimen/margin_48dp"
+        android:layout_height="@dimen/margin_48dp"
+        android:layout_marginEnd="@dimen/margin_4dp"
+        android:src="@drawable/baseline_star_24"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/home_tool_Bar_profile"
-        app:layout_constraintStart_toEndOf="@+id/home_name_tool_bar"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
