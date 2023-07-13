@@ -13,11 +13,13 @@
     <string name="book_author">Book Author</string>
     <string name="page_number">Page Number</string>
     <string name="book_type">Book Type</string>
+    <string name="book_subject">Book Subject</string>
     <string name="book_language">Book Language</string>
     <string name="book_publishing_house">Publisher</string>
     <string name="book_message">Message about the book</string>
     <string name="date">Date</string>
     <string name="add">Add</string>
+    <string name="suggestion">Suggestions</string>
     <string name="change">Change</string>
     <string name="change_password">Change Password</string>
     <string name="sign_out">Sign Out</string>
