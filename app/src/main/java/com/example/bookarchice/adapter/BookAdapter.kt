@@ -1,13 +1,11 @@
 package com.example.bookarchice.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bookarchice.R
+import com.example.bookarchice.databinding.RecyclerItemBinding
 import com.example.bookarchice.model.Book
 import java.util.Locale
 
@@ -21,21 +19,19 @@ class BookAdapter(private val listener: Listener) :
         fun onItemClick(bookList: Book)
     }
 
-    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class MyViewHolder(val binding: RecyclerItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(bookList: Book, listener: Listener) {
             itemView.setOnClickListener {
                 listener.onItemClick(bookList)
             }
         }
-
-        var bookName: TextView = view.findViewById(R.id.recycler_item_book_name)
-        var bookAuthor: TextView = view.findViewById(R.id.recycler_item_book_author)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.recycler_item, parent, false)
-        return MyViewHolder(view)
+        val binding =
+            RecyclerItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MyViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -44,9 +40,10 @@ class BookAdapter(private val listener: Listener) :
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val book = this.filterList[position]
+        val binding = holder.binding
         holder.bind(book, listener)
-        holder.bookName.text = book.bookName
-        holder.bookAuthor.text = book.bookAuthor
+        binding.recyclerItemBookName.text = book.bookName
+        binding.recyclerItemBookAuthor.text = book.bookAuthor
         holder.itemView.setOnClickListener {
             listener.onItemClick(book)
         }
