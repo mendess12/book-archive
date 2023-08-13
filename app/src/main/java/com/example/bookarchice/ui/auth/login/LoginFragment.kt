@@ -1,6 +1,7 @@
 package com.example.bookarchice.ui.auth.login
 
 import android.os.Bundle
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -52,9 +53,31 @@ class LoginFragment : Fragment() {
                 val email = binding.loginScreenEmailEt.text.toString().trim()
                 val password = binding.loginScreenPasswordEt.text.toString().trim()
 
-                viewModel.getLoginDataFromRepository(binding, email, password)
+                if (isEligibleToLogin(binding, email, password)){
+                    viewModel.getLoginDataFromRepository(email, password)
+                }
             }
         }
+    }
+
+    private fun isEligibleToLogin(binding: FragmentLoginBinding, email: String, password: String): Boolean{
+        if (email.isEmpty()) {
+            binding.loginScreenEmailEt.error = "Email required"
+            binding.loginScreenEmailEt.requestFocus()
+            return false
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            binding.loginScreenEmailEt.error = "Valid email required"
+            binding.loginScreenEmailEt.requestFocus()
+            return false
+        }
+        if (password.isEmpty() || password.length < 6) {
+            binding.loginScreenPasswordEt.error = "6 char password required"
+            binding.loginScreenPasswordEt.requestFocus()
+            return false
+        }
+
+        return true
     }
 
     private fun observeLiveData() {

@@ -2,37 +2,25 @@ package com.example.bookarchice.repository
 
 import androidx.lifecycle.MutableLiveData
 import com.example.bookarchice.util.logDebug
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.tasks.await
 
 // TODO Repo katmanina Livedata(android componentleri girmez)
 // TODO Firebase Auth Constructordan verilir(Dependency Injection)
 // TODO Task donmektense, coroutine extension kutuphanesi eklenecek
-class AuthRepository {
+class AuthRepository(val firebaseAuth: FirebaseAuth) {
 
-    private lateinit var auth: FirebaseAuth
     private val loginLogTitle = "Error Login"
     private val registerLogTitle = "Error Register"
     private val forgotPasswordLogTitle = "Error Forgot Password"
-    fun login(email: String, password: String, loginLiveData: MutableLiveData<String>) {
-        auth = FirebaseAuth.getInstance()
 
-        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
-            if (it.isSuccessful) {
-                loginLiveData.postValue(it.toString())
-            } else {
-                logDebug(loginLogTitle, it.exception.toString())
-                loginLiveData.postValue(null)
-            }
-        }.addOnFailureListener {
-            loginLiveData.postValue(null)
-            logDebug(loginLogTitle, it.localizedMessage!!)
-        }
+    suspend fun login(email: String, password: String): AuthResult{
+        return firebaseAuth.signInWithEmailAndPassword(email, password).await()
     }
 
     fun register(email: String, password: String, registerLiveData: MutableLiveData<String>) {
-        auth = FirebaseAuth.getInstance()
-
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
+        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
             if (it.isSuccessful) {
                 registerLiveData.postValue(it.toString())
             } else {
@@ -46,9 +34,8 @@ class AuthRepository {
     }
 
     fun forgotPassword(email: String, forgotPasswordLiveData: MutableLiveData<String>) {
-        auth = FirebaseAuth.getInstance()
 
-        auth.sendPasswordResetEmail(email).addOnCompleteListener {
+        firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener {
             if (it.isSuccessful) {
                 forgotPasswordLiveData.postValue(it.toString())
             } else {
