@@ -7,6 +7,9 @@ import com.example.bookarchice.util.logDebug
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
+// TODO Repo katmanina Livedata(android componentleri girmez)
+// TODO Firebase Auth ve FirebaseFirestore Constructordan verilir(Dependency Injection)
+// TODO Task donmektense, coroutine extension kutuphanesi eklenecek
 class HomeRepository {
 
     private lateinit var database: FirebaseFirestore
@@ -56,7 +59,7 @@ class HomeRepository {
     ) {
         database = FirebaseFirestore.getInstance()
         val uid = auth.currentUser?.uid
-
+        // TODO bu magic stringler constanta alinmali, ve Document direk Objeye cevrilebilir
         database.collection("Books").whereEqualTo("userId", uid).get().addOnSuccessListener {
             val bookList = mutableListOf<Book>()
             for (document in it) {

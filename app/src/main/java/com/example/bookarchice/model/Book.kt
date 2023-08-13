@@ -2,6 +2,7 @@ package com.example.bookarchice.model
 
 import java.io.Serializable
 
+// TODO var yapmaya gerek yok, nullable olma ihtiyaci olan datalar nullable birakilmali ve defaultlari null ise null verilmeli
 data class Book(
     var bookName: String?,
     var bookAuthor: String?,

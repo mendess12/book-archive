@@ -5,6 +5,10 @@ import com.example.bookarchice.util.logDebug
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 
+
+// TODO Repo katmanina Livedata(android componentleri girmez)
+// TODO Firebase Auth Constructordan verilir(Dependency Injection)
+// TODO Task donmektense, coroutine extension kutuphanesi eklenecek ve methodlar suspende cevrilecek
 class ProfileRepository {
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()

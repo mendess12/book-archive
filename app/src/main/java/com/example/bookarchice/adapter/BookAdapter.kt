@@ -9,6 +9,7 @@ import com.example.bookarchice.databinding.RecyclerItemBinding
 import com.example.bookarchice.model.Book
 import java.util.Locale
 
+// TODO Listener yerine nullable lambda function
 class BookAdapter(private val listener: Listener) :
     RecyclerView.Adapter<BookAdapter.MyViewHolder>(), Filterable {
 

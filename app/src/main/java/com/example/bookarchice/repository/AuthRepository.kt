@@ -4,13 +4,15 @@ import androidx.lifecycle.MutableLiveData
 import com.example.bookarchice.util.logDebug
 import com.google.firebase.auth.FirebaseAuth
 
+// TODO Repo katmanina Livedata(android componentleri girmez)
+// TODO Firebase Auth Constructordan verilir(Dependency Injection)
+// TODO Task donmektense, coroutine extension kutuphanesi eklenecek
 class AuthRepository {
 
     private lateinit var auth: FirebaseAuth
     private val loginLogTitle = "Error Login"
     private val registerLogTitle = "Error Register"
     private val forgotPasswordLogTitle = "Error Forgot Password"
-
     fun login(email: String, password: String, loginLiveData: MutableLiveData<String>) {
         auth = FirebaseAuth.getInstance()
 
