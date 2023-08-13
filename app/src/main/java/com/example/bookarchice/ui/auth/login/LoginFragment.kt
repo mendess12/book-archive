@@ -1,7 +1,6 @@
 package com.example.bookarchice.ui.auth.login
 
 import android.os.Bundle
-import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -36,6 +35,7 @@ class LoginFragment : Fragment() {
             findNavController().navigate(action)
         }
         setOnClickMethod()
+        observeLiveData()
     }
 
     private fun setOnClickMethod() {
@@ -49,26 +49,10 @@ class LoginFragment : Fragment() {
                 Navigation.findNavController(it).navigate(action)
             }
             loginScreenLoginButton.setOnClickListener {
-                viewModel.email = binding.loginScreenEmailEt.text.toString().trim()
-                viewModel.password = binding.loginScreenPasswordEt.text.toString().trim()
+                val email = binding.loginScreenEmailEt.text.toString().trim()
+                val password = binding.loginScreenPasswordEt.text.toString().trim()
 
-                if (viewModel.email.isEmpty()) {
-                    binding.loginScreenEmailEt.error = "Email required"
-                    binding.loginScreenEmailEt.requestFocus()
-                    return@setOnClickListener
-                }
-                if (!Patterns.EMAIL_ADDRESS.matcher(viewModel.email).matches()) {
-                    binding.loginScreenEmailEt.error = "Valid email required"
-                    binding.loginScreenEmailEt.requestFocus()
-                    return@setOnClickListener
-                }
-                if (viewModel.password.isEmpty() || viewModel.password.length < 6) {
-                    binding.loginScreenPasswordEt.error = "6 char password required"
-                    binding.loginScreenPasswordEt.requestFocus()
-                    return@setOnClickListener
-                }
-                observeLiveData()
-                viewModel.getLoginDataFromRepository()
+                viewModel.getLoginDataFromRepository(binding, email, password)
             }
         }
     }
