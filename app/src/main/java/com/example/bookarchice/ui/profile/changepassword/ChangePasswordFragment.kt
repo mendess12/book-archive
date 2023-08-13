@@ -17,7 +17,6 @@ class ChangePasswordFragment : Fragment() {
     private lateinit var binding: FragmentChangePasswordBinding
     private val viewModel: ChangePasswordViewModel by viewModels()
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private val message = "6 char password required"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,35 +29,21 @@ class ChangePasswordFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentChangePasswordBinding.bind(view)
 
-
         binding.changePasswordScreenChangeButton.setOnClickListener {
-            viewModel.password = binding.changePasswordScreenPasswordEt.text.toString().trim()
-            viewModel.newPassword = binding.changePasswordScreenNewPasswordEt.text.toString().trim()
+            val password = binding.changePasswordScreenPasswordEt.text.toString().trim()
+            val newPassword = binding.changePasswordScreenNewPasswordEt.text.toString().trim()
             val retypeNewPassword =
                 binding.changePasswordScreenRetypeNewPasswordEt.text.toString().trim()
 
-            if (viewModel.password.isEmpty() || viewModel.password.length < 6) {
-                binding.changePasswordScreenPasswordEt.error = message
-                binding.changePasswordScreenPasswordEt.requestFocus()
-                return@setOnClickListener
-            }
-            if (viewModel.newPassword.isEmpty() || viewModel.newPassword.length < 6) {
-                binding.changePasswordScreenNewPasswordEt.error = message
-                binding.changePasswordScreenNewPasswordEt.requestFocus()
-                return@setOnClickListener
-            }
-            if (retypeNewPassword.isEmpty() || retypeNewPassword.length < 6) {
-                binding.changePasswordScreenRetypeNewPasswordEt.error = message
-                binding.changePasswordScreenRetypeNewPasswordEt.requestFocus()
-                return@setOnClickListener
-            }
-            if (viewModel.newPassword != retypeNewPassword) {
-                view.showSnackBar("New password and retype new password not same!")
-                return@setOnClickListener
-            }
-            viewModel.getChangePasswordDataFromRepository()
-            observeLiveData()
+            viewModel.getChangePasswordDataFromRepository(
+                view,
+                binding,
+                password,
+                newPassword,
+                retypeNewPassword
+            )
         }
+        observeLiveData()
 
         binding.changePasswordScreenToolBar.backToolBar.setOnClickListener {
             findNavController().popBackStack()
