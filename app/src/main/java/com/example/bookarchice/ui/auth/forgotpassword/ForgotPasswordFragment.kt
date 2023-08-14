@@ -16,6 +16,7 @@ class ForgotPasswordFragment : Fragment() {
 
     private lateinit var binding: FragmentForgotPasswordBinding
     private val viewModel: ForgotPasswordViewModel by viewModels()
+    private lateinit var email: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +30,7 @@ class ForgotPasswordFragment : Fragment() {
         binding = FragmentForgotPasswordBinding.bind(view)
 
         setOnClickMethod()
+        observeLiveData()
     }
 
     private fun setOnClickMethod() {
@@ -37,27 +39,36 @@ class ForgotPasswordFragment : Fragment() {
                 findNavController().popBackStack()
             }
             forgotPasswordScreenForgotPasswordButton.setOnClickListener {
-                viewModel.email = binding.forgotPasswordScreenEmailEt.text.toString().trim()
+                email = binding.forgotPasswordScreenEmailEt.text.toString().trim()
 
-                if (viewModel.email.isEmpty()) {
-                    binding.forgotPasswordScreenEmailEt.error = "Email required"
-                    binding.forgotPasswordScreenEmailEt.requestFocus()
-                    return@setOnClickListener
+                if (isEligibleToForgotPassword(binding, email)) {
+                    viewModel.getForgotPasswordDataFromRepository(email)
                 }
-                if (!Patterns.EMAIL_ADDRESS.matcher(viewModel.email).matches()) {
-                    binding.forgotPasswordScreenEmailEt.error = "Valid email required"
-                    binding.forgotPasswordScreenEmailEt.requestFocus()
-                    return@setOnClickListener
-                }
-                observeLiveData()
             }
         }
+    }
+
+    private fun isEligibleToForgotPassword(
+        binding: FragmentForgotPasswordBinding,
+        email: String
+    ): Boolean {
+        if (email.isEmpty()) {
+            binding.forgotPasswordScreenEmailEt.error = "Email required"
+            binding.forgotPasswordScreenEmailEt.requestFocus()
+            return false
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            binding.forgotPasswordScreenEmailEt.error = "Valid email required"
+            binding.forgotPasswordScreenEmailEt.requestFocus()
+            return false
+        }
+        return true
     }
 
     private fun observeLiveData() {
         viewModel.forgotPasswordLiveData.observe(viewLifecycleOwner) {
             if (it != null) {
-                view?.showSnackBar("Link sent to ${viewModel.email} this email. Please check your email!")
+                view?.showSnackBar("Link sent to $email this email. Please check your email!")
                 val action =
                     ForgotPasswordFragmentDirections.actionForgotPasswordFragmentToLoginFragment()
                 findNavController().navigate(action)
@@ -65,6 +76,5 @@ class ForgotPasswordFragment : Fragment() {
                 view?.showSnackBar("Check your email")
             }
         }
-        viewModel.getForgotPasswordDataFromRepository()
     }
 }
