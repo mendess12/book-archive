@@ -28,8 +28,8 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentRegisterBinding.bind(view)
-
         setOnClickMethod()
+        observeLiveData()
     }
 
     private fun setOnClickMethod() {
@@ -39,33 +39,44 @@ class RegisterFragment : Fragment() {
                 Navigation.findNavController(it).navigate(action)
             }
             registerScreenRegisterButton.setOnClickListener {
-                viewModel.email = binding.registerScreenEmailEt.text.toString().trim()
-                viewModel.password = binding.registerScreenPasswordEt.text.toString().trim()
-                viewModel.userName = binding.registerScreenUserNameEt.text.toString().trim()
+                val email = binding.registerScreenEmailEt.text.toString().trim()
+                val password = binding.registerScreenPasswordEt.text.toString().trim()
+                val userName = binding.registerScreenUserNameEt.text.toString().trim()
 
-                if (viewModel.email.isEmpty()) {
-                    binding.registerScreenEmailEt.error = "Email required"
-                    binding.registerScreenEmailEt.requestFocus()
-                    return@setOnClickListener
+                if (isEligibleToRegister(binding, email, password, userName)) {
+                    viewModel.getRegisterDataFromRepository(email, password)
                 }
-                if (!Patterns.EMAIL_ADDRESS.matcher(viewModel.email).matches()) {
-                    binding.registerScreenEmailEt.error = "Valid email required"
-                    binding.registerScreenEmailEt.requestFocus()
-                    return@setOnClickListener
-                }
-                if (viewModel.password.isEmpty() || viewModel.password.length < 6) {
-                    binding.registerScreenPasswordEt.error = "6 char password required"
-                    binding.registerScreenPasswordEt.requestFocus()
-                    return@setOnClickListener
-                }
-                if (viewModel.userName.isEmpty()) {
-                    binding.registerScreenUserNameEt.error = "User name required"
-                    binding.registerScreenUserNameEt.requestFocus()
-                    return@setOnClickListener
-                }
-                observeLiveData()
             }
         }
+    }
+
+    private fun isEligibleToRegister(
+        binding: FragmentRegisterBinding,
+        email: String,
+        password: String,
+        userName: String
+    ): Boolean {
+        if (email.isEmpty()) {
+            binding.registerScreenEmailEt.error = "Email required"
+            binding.registerScreenEmailEt.requestFocus()
+            return false
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            binding.registerScreenEmailEt.error = "Valid email required"
+            binding.registerScreenEmailEt.requestFocus()
+            return false
+        }
+        if (password.isEmpty() || password.length < 6) {
+            binding.registerScreenPasswordEt.error = "6 char password required"
+            binding.registerScreenPasswordEt.requestFocus()
+            return false
+        }
+        if (userName.isEmpty()) {
+            binding.registerScreenUserNameEt.error = "User name required"
+            binding.registerScreenUserNameEt.requestFocus()
+            return false
+        }
+        return true
     }
 
     private fun observeLiveData() {
@@ -77,6 +88,5 @@ class RegisterFragment : Fragment() {
                 view?.showSnackBar("Check your email, password and user name!")
             }
         }
-        viewModel.getRegisterDataFromRepository()
     }
 }

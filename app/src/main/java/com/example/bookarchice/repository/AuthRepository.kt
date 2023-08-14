@@ -9,7 +9,7 @@ import kotlinx.coroutines.tasks.await
 // TODO Repo katmanina Livedata(android componentleri girmez)
 // TODO Firebase Auth Constructordan verilir(Dependency Injection)
 // TODO Task donmektense, coroutine extension kutuphanesi eklenecek
-class AuthRepository(val firebaseAuth: FirebaseAuth) {
+class AuthRepository(private val firebaseAuth: FirebaseAuth) {
 
     private val loginLogTitle = "Error Login"
     private val registerLogTitle = "Error Register"
@@ -19,18 +19,8 @@ class AuthRepository(val firebaseAuth: FirebaseAuth) {
         return firebaseAuth.signInWithEmailAndPassword(email, password).await()
     }
 
-    fun register(email: String, password: String, registerLiveData: MutableLiveData<String>) {
-        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
-            if (it.isSuccessful) {
-                registerLiveData.postValue(it.toString())
-            } else {
-                logDebug(registerLogTitle, it.exception.toString())
-                registerLiveData.postValue(null)
-            }
-        }.addOnFailureListener {
-            registerLiveData.postValue(null)
-            logDebug(registerLogTitle, it.localizedMessage!!)
-        }
+    suspend fun register(email: String, password: String): AuthResult {
+        return firebaseAuth.createUserWithEmailAndPassword(email, password).await()
     }
 
     fun forgotPassword(email: String, forgotPasswordLiveData: MutableLiveData<String>) {
