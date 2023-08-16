@@ -4,15 +4,19 @@ import androidx.lifecycle.MutableLiveData
 import com.example.bookarchice.model.Book
 import com.example.bookarchice.model.SuggestionBook
 import com.example.bookarchice.util.logDebug
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
+import kotlinx.coroutines.tasks.await
 
 // TODO Repo katmanina Livedata(android componentleri girmez)
 // TODO Firebase Auth ve FirebaseFirestore Constructordan verilir(Dependency Injection)
 // TODO Task donmektense, coroutine extension kutuphanesi eklenecek
-class HomeRepository {
+class HomeRepository(private var database: FirebaseFirestore) {
 
-    private lateinit var database: FirebaseFirestore
+    //private lateinit var database: FirebaseFirestore
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     fun addBookData(
@@ -54,72 +58,82 @@ class HomeRepository {
         }
     }
 
-    fun getBookList(
-        bookListLiveData: MutableLiveData<List<Book>>
-    ) {
-        database = FirebaseFirestore.getInstance()
-        val uid = auth.currentUser?.uid
-        // TODO bu magic stringler constanta alinmali, ve Document direk Objeye cevrilebilir
-        database.collection("Books").whereEqualTo("userId", uid).get().addOnSuccessListener {
-            val bookList = mutableListOf<Book>()
-            for (document in it) {
-                val name = document.getString("bookName")
-                val author = document.getString("bookAuthor")
-                val pageNumber = document.getString("pageNumber")
-                val type = document.getString("bookType")
-                val language = document.getString("bookLanguage")
-                val publisher = document.getString("bookPublisher")
-                val message = document.getString("bookMessage")
-                val date = document.getString("bookDate")
-                val userId = document.getString("userId")
 
-                bookList.add(
-                    Book(
-                        name,
-                        author,
-                        pageNumber,
-                        type,
-                        language,
-                        publisher,
-                        message,
-                        date,
-                        userId.toString()
-                    )
-                )
-            }
-            bookListLiveData.value = bookList
-        }.addOnFailureListener {
-            bookListLiveData.value = null
-            logDebug("Failed message", it.message.toString())
-        }
+    /* fun getBookList(
+         bookListLiveData: MutableLiveData<List<Book>>
+     ) {
+         database = FirebaseFirestore.getInstance()
+         val uid = auth.currentUser?.uid
+         // TODO bu magic stringler constanta alinmali, ve Document direk Objeye cevrilebilir
+         database.collection("Books").whereEqualTo("userId", uid).get().addOnSuccessListener {
+             val bookList = mutableListOf<Book>()
+             for (document in it) {
+                 val name = document.getString("bookName")
+                 val author = document.getString("bookAuthor")
+                 val pageNumber = document.getString("pageNumber")
+                 val type = document.getString("bookType")
+                 val language = document.getString("bookLanguage")
+                 val publisher = document.getString("bookPublisher")
+                 val message = document.getString("bookMessage")
+                 val date = document.getString("bookDate")
+                 val userId = document.getString("userId")
+
+                 bookList.add(
+                     Book(
+                         name,
+                         author,
+                         pageNumber,
+                         type,
+                         language,
+                         publisher,
+                         message,
+                         date,
+                         userId.toString()
+                     )
+                 )
+             }
+             bookListLiveData.value = bookList
+         }.addOnFailureListener {
+             bookListLiveData.value = null
+             logDebug("Failed message", it.message.toString())
+         }
+     }*/
+
+    suspend fun getBookList(): QuerySnapshot {
+        val uid = auth.currentUser?.uid
+        return database.collection("Books").whereEqualTo("userId", uid).get().await()
     }
 
-    fun getSuggestionsList(
-        suggestionsListLiveData: MutableLiveData<List<SuggestionBook>>
-    ) {
-        database = FirebaseFirestore.getInstance()
+    /* fun getSuggestionsList(
+         suggestionsListLiveData: MutableLiveData<List<SuggestionBook>>
+     ) {
+         database = FirebaseFirestore.getInstance()
 
-        database.collection("Suggestion").get().addOnSuccessListener {
-            val suggestionList = mutableListOf<SuggestionBook>()
-            for (document in it) {
-                val name = document.getString("name")
-                val author = document.getString("author")
-                val pageNumber = document.getString("subject")
-                val type = document.getString("type")
+         database.collection("Suggestion").get().addOnSuccessListener {
+             val suggestionList = mutableListOf<SuggestionBook>()
+             for (document in it) {
+                 val name = document.getString("name")
+                 val author = document.getString("author")
+                 val pageNumber = document.getString("subject")
+                 val type = document.getString("type")
 
-                suggestionList.add(
-                    SuggestionBook(
-                        name,
-                        author,
-                        pageNumber,
-                        type
-                    )
-                )
-            }
-            suggestionsListLiveData.value = suggestionList
-        }.addOnFailureListener {
-            suggestionsListLiveData.value = null
-            logDebug("Failed message", it.message.toString())
-        }
+                 suggestionList.add(
+                     SuggestionBook(
+                         name,
+                         author,
+                         pageNumber,
+                         type
+                     )
+                 )
+             }
+             suggestionsListLiveData.value = suggestionList
+         }.addOnFailureListener {
+             suggestionsListLiveData.value = null
+             logDebug("Failed message", it.message.toString())
+         }
+     }*/
+
+    suspend fun getSuggestionList(): QuerySnapshot {
+        return database.collection("Suggestion").get().await()
     }
 }

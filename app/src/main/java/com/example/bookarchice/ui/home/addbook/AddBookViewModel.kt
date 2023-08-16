@@ -3,10 +3,11 @@ package com.example.bookarchice.ui.home.addbook
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.bookarchice.repository.HomeRepository
+import com.google.firebase.firestore.FirebaseFirestore
 
 class AddBookViewModel : ViewModel() {
 
-    private val homeRepository = HomeRepository()
+    private val homeRepository = HomeRepository(FirebaseFirestore.getInstance())
     var name: String = ""
     var author: String = ""
     var pageNumber: String = ""
