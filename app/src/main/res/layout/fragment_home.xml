@@ -21,6 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/margin_0dp"
         tools:listitem="@layout/recycler_item"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

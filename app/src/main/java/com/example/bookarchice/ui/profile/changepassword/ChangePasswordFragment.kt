@@ -51,8 +51,8 @@ class ChangePasswordFragment : Fragment() {
     }
 
     private fun observeLiveData() {
-        viewModel.changePasswordLiveData.observe(viewLifecycleOwner) {
-            if (it != null) {
+        viewModel.changePasswordErrorLiveData.observe(viewLifecycleOwner) {
+            if (it == null) {
                 val action =
                     ChangePasswordFragmentDirections.actionChangePasswordFragmentToLoginFragment()
                 findNavController().navigate(action)

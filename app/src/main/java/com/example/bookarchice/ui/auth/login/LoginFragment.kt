@@ -1,6 +1,7 @@
 package com.example.bookarchice.ui.auth.login
 
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,18 +15,11 @@ import com.example.bookarchice.databinding.FragmentLoginBinding
 import com.example.bookarchice.util.showSnackBar
 import com.google.firebase.auth.FirebaseAuth
 
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private lateinit var binding: FragmentLoginBinding
     private val viewModel: LoginViewModel by viewModels()
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_login, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -82,6 +76,7 @@ class LoginFragment : Fragment() {
 
     private fun observeLiveData() {
         viewModel.loginLiveData.observe(viewLifecycleOwner) {
+            Log.e(TAG,"Result = $it")
             if (it != null) {
                 val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
                 findNavController().navigate(action)
@@ -89,5 +84,9 @@ class LoginFragment : Fragment() {
                 view?.showSnackBar("Check your email and password!")
             }
         }
+    }
+
+    companion object{
+        private const val TAG = "LoginFragment"
     }
 }

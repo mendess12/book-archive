@@ -10,7 +10,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookarchice.R
 import com.example.bookarchice.adapter.BookAdapter
 import com.example.bookarchice.databinding.FragmentHomeBinding
@@ -37,14 +36,14 @@ class HomeFragment : Fragment(), BookAdapter.Listener {
         binding = FragmentHomeBinding.bind(view)
 
         bookAdapter = BookAdapter(this@HomeFragment)
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = bookAdapter
         searchView()
         observeLiveData()
 
+        //TODO click listenerlari ayri methodlara alirsak daha okunur olur.
         binding.homeScreenAddButton.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToAddBookFragment()
-            Navigation.findNavController(view).navigate(action)
+            findNavController().navigate(action)
         }
 
         binding.homeScreenToolBar.homeToolBarProfile.setOnClickListener {
@@ -53,7 +52,7 @@ class HomeFragment : Fragment(), BookAdapter.Listener {
 
         binding.homeScreenToolBar.homeToolBarStarBook.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToSuggestionBookFragment()
-            Navigation.findNavController(it).navigate(action)
+            findNavController().navigate(action)
         }
     }
 

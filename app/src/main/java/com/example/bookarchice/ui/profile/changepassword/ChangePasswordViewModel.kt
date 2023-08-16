@@ -3,13 +3,19 @@ package com.example.bookarchice.ui.profile.changepassword
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.bookarchice.databinding.FragmentChangePasswordBinding
 import com.example.bookarchice.repository.ProfileRepository
 import com.example.bookarchice.util.showSnackBar
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.launch
 
 class ChangePasswordViewModel : ViewModel() {
-    private val profileRepository = ProfileRepository()
-    var changePasswordLiveData = MutableLiveData<String>()
+    private val profileRepository = ProfileRepository(
+        FirebaseAuth.getInstance()
+    )
+
+    var changePasswordErrorLiveData = MutableLiveData<Throwable?>()
     private val message = "6 char password required"
 
     fun getChangePasswordDataFromRepository(
@@ -38,6 +44,14 @@ class ChangePasswordViewModel : ViewModel() {
             view.showSnackBar("New password and retype new password not same!")
             return
         }
-        profileRepository.changePassword(password, newPassword, changePasswordLiveData)
+
+        viewModelScope.launch {
+            try {
+                profileRepository.changePassword(password, newPassword)
+                changePasswordErrorLiveData.postValue(null)
+            }catch (ex: Exception){
+                changePasswordErrorLiveData.postValue(ex)
+            }
+        }
     }
 }

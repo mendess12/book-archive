@@ -2,15 +2,16 @@ package com.example.bookarchice.model
 
 import java.io.Serializable
 
-// TODO var yapmaya gerek yok, nullable olma ihtiyaci olan datalar nullable birakilmali ve defaultlari null ise null verilmeli
 data class Book(
-    var bookName: String?,
-    var bookAuthor: String?,
-    var pageNumber: String?,
-    var bookType: String?,
-    var bookLanguage: String?,
-    var bookPublisher: String?,
-    var bookMessage: String?,
-    var bookDate: String?,
-    var userId: String
-) : Serializable
+    val bookName: String? = null,
+    val bookAuthor: String? = null,
+    val pageNumber: String? = null,
+    val bookType: String? = null,
+    val bookLanguage: String? = null,
+    val bookPublisher: String? = null,
+    val bookMessage: String? = null,
+    val bookDate: String? = null,
+    val userId: String
+) : Serializable{
+
+}

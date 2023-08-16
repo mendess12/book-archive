@@ -2,11 +2,8 @@ package com.example.bookarchice.repository
 
 import androidx.lifecycle.MutableLiveData
 import com.example.bookarchice.model.Book
-import com.example.bookarchice.model.SuggestionBook
 import com.example.bookarchice.util.logDebug
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.tasks.await

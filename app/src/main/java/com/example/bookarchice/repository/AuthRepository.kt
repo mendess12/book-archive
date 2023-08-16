@@ -4,9 +4,6 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await
 
-// TODO Repo katmanina Livedata(android componentleri girmez)
-// TODO Firebase Auth Constructordan verilir(Dependency Injection)
-// TODO Task donmektense, coroutine extension kutuphanesi eklenecek
 class AuthRepository(private val firebaseAuth: FirebaseAuth) {
 
     suspend fun login(email: String, password: String): AuthResult{
@@ -14,10 +11,12 @@ class AuthRepository(private val firebaseAuth: FirebaseAuth) {
     }
 
     suspend fun register(email: String, password: String): AuthResult {
-        return firebaseAuth.createUserWithEmailAndPassword(email, password).await()
+        val authResult = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
+        firebaseAuth.signOut()
+        return authResult
     }
 
-    suspend fun forgotPassword(email: String): Void {
-        return firebaseAuth.sendPasswordResetEmail(email).await()
+    suspend fun forgotPassword(email: String) {
+        firebaseAuth.sendPasswordResetEmail(email).await()
     }
 }
