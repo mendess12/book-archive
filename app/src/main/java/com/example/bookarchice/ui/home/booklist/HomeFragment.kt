@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.bookarchice.R
 import com.example.bookarchice.adapter.BookAdapter
@@ -41,6 +40,10 @@ class HomeFragment : Fragment(), BookAdapter.Listener {
         observeLiveData()
 
         //TODO click listenerlari ayri methodlara alirsak daha okunur olur.
+        clickMethod()
+    }
+
+    private fun clickMethod() {
         binding.homeScreenAddButton.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToAddBookFragment()
             findNavController().navigate(action)
