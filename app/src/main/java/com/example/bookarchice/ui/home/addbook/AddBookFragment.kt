@@ -12,13 +12,14 @@ import com.example.bookarchice.R
 import com.example.bookarchice.databinding.FragmentAddBookBinding
 import com.example.bookarchice.model.Book
 import com.example.bookarchice.util.showSnackBar
+import com.google.firebase.auth.FirebaseAuth
 
 class AddBookFragment : Fragment() {
 
     private lateinit var binding: FragmentAddBookBinding
     private val args: AddBookFragmentArgs by navArgs()
     private val viewModel: AddBookViewModel by viewModels()
-    var book: Book? = null
+    private var bookArgs: Book? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,9 +31,10 @@ class AddBookFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAddBookBinding.bind(view)
-        book = args.book
+        bookArgs = args.book
 
-        if (book == null) {
+
+        if (bookArgs == null) {
             binding.addBookScreenAddButton.setOnClickListener {
                 setBookData()
                 observeLiveData()
@@ -57,15 +59,26 @@ class AddBookFragment : Fragment() {
     }
 
     private fun setBookData() {
-        viewModel.apply {
-            name = binding.addBookScreenBookName.text.toString()
-            author = binding.addBookScreenBookAuthor.text.toString()
-            pageNumber = binding.addBookScreenPageNumber.text.toString()
-            type = binding.addBookScreenBookType.text.toString()
-            language = binding.addBookScreenBookLanguage.text.toString()
-            publisher = binding.addBookScreenBookPublisher.text.toString()
-            message = binding.addBookScreenBookMessage.text.toString()
-            date = binding.addBookScreenBookDate.text.toString()
+
+        val name = binding.addBookScreenBookName.text.toString()
+        val author = binding.addBookScreenBookAuthor.text.toString()
+        val pageNumber = binding.addBookScreenPageNumber.text.toString()
+        val type = binding.addBookScreenBookType.text.toString()
+        val language = binding.addBookScreenBookLanguage.text.toString()
+        val publisher = binding.addBookScreenBookPublisher.text.toString()
+        val message = binding.addBookScreenBookMessage.text.toString()
+        val date = binding.addBookScreenBookDate.text.toString()
+        val uuid = FirebaseAuth.getInstance().currentUser?.uid
+
+        val book =
+            uuid?.let {
+                Book(
+                    name, author, pageNumber, type, language, publisher, message, date,
+                    it
+                )
+            }
+        if (book != null) {
+            viewModel.addBookDataFromFirebase(book)
         }
     }
 
@@ -78,6 +91,5 @@ class AddBookFragment : Fragment() {
                 view?.showSnackBar("Failed!")
             }
         }
-        viewModel.addBookDataFromFirebase()
     }
 }

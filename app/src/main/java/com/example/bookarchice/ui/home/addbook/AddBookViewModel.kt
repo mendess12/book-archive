@@ -1,32 +1,31 @@
 package com.example.bookarchice.ui.home.addbook
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.bookarchice.model.Book
 import com.example.bookarchice.repository.HomeRepository
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class AddBookViewModel : ViewModel() {
 
     private val homeRepository = HomeRepository(FirebaseFirestore.getInstance())
-    var name: String = ""
-    var author: String = ""
-    var pageNumber: String = ""
-    var language: String = ""
-    var type: String = ""
-    var publisher: String = ""
-    var message: String = ""
-    var date: String = ""
-    var addLiveData = MutableLiveData<String>()
 
-    fun addBookDataFromFirebase() = homeRepository.addBookData(
-        name,
-        author,
-        pageNumber,
-        type,
-        language,
-        publisher,
-        message,
-        date,
-        addLiveData
-    )
+    var addLiveData = MutableLiveData<String?>()
+
+    fun addBookDataFromFirebase(book: Book) {
+        viewModelScope.launch {
+            try {
+                val result = homeRepository.addBookData(book)
+                addLiveData.postValue(result.toString())
+
+            } catch (exception: Exception) {
+                Log.e("Add book error", exception.toString())
+                addLiveData.postValue(null)
+            }
+        }
+    }
 }
