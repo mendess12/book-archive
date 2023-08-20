@@ -64,6 +64,7 @@ class ForgotPasswordFragment : Fragment(R.layout.fragment_forgot_password) {
             Log.e("ForgotPassword","$Result = $it")
             if (it != null) {
                 view?.showSnackBar("Link sent to $email this email. Please check your email!")
+                // TODO geri islemi yapiliyor aslinda, onu navigateUpa cevir veya popBackStack
                 val action =
                     ForgotPasswordFragmentDirections.actionForgotPasswordFragmentToLoginFragment()
                 findNavController().navigate(action)

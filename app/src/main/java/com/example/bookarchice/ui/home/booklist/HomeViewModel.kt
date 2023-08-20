@@ -1,5 +1,6 @@
 package com.example.bookarchice.ui.home.booklist
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -19,37 +20,16 @@ class HomeViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val result = homeRepository.getBookList()
-                val bookList = mutableListOf<Book>()
-                for (document in result) {
-                    val name = document.getString("bookName")
-                    val author = document.getString("bookAuthor")
-                    val pageNumber = document.getString("pageNumber")
-                    val type = document.getString("bookType")
-                    val language = document.getString("bookLanguage")
-                    val publisher = document.getString("bookPublisher")
-                    val message = document.getString("bookMessage")
-                    val date = document.getString("bookDate")
-                    val userId = document.getString("userId")
-
-                    bookList.add(
-                        Book(
-                            name,
-                            author,
-                            pageNumber,
-                            type,
-                            language,
-                            publisher,
-                            message,
-                            date,
-                            userId.toString()
-                        )
-                    )
-                }
-                booksLiveData.postValue(bookList)
+                booksLiveData.postValue(result)
             } catch (exception: Exception) {
                 booksLiveData.postValue(null)
+                Log.e(TAG,"$exception")
                 logDebug("Home message", exception.toString())
             }
         }
+    }
+
+    companion object{
+        private const val TAG = "HomeViewModel"
     }
 }

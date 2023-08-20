@@ -10,6 +10,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
+//TODO Butun viewmodellara Dagger Hilt eklendikten sonra constructor injection yapilacak
 class AddBookViewModel : ViewModel() {
 
     private val homeRepository = HomeRepository(FirebaseFirestore.getInstance())

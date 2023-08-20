@@ -12,8 +12,9 @@ class ProfileRepository(val auth: FirebaseAuth) {
         newPassword: String
     ) {
         val user = auth.currentUser
-        if (user != null && user.email != null) {
-            val credential = EmailAuthProvider.getCredential(user.email!!, password)
+        val userEmail = user?.email
+        if (user != null && userEmail != null) {
+            val credential = EmailAuthProvider.getCredential(userEmail, password)
             user.reauthenticate(credential).await()
             logDebug("User Message", "Re-Authentication success")
             user.updatePassword(newPassword).await()

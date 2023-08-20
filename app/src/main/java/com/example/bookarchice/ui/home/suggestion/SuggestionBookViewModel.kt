@@ -14,6 +14,7 @@ class SuggestionBookViewModel : ViewModel() {
     private val homeRepository = HomeRepository(FirebaseFirestore.getInstance())
     var suggestionLiveData: MutableLiveData<List<SuggestionBook>?> = MutableLiveData()
 
+    // TODO Burasi direk objeye parse olacak
     fun getSuggestionBookDataFromRepository() {
         viewModelScope.launch {
             try {

@@ -29,6 +29,7 @@ class ChangePasswordFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentChangePasswordBinding.bind(view)
 
+        // TODO ayri bit method
         binding.changePasswordScreenChangeButton.setOnClickListener {
             val password = binding.changePasswordScreenPasswordEt.text.toString().trim()
             val newPassword = binding.changePasswordScreenNewPasswordEt.text.toString().trim()

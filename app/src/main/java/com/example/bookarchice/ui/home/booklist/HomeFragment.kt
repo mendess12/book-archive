@@ -39,14 +39,8 @@ class HomeFragment : Fragment(), BookAdapter.Listener {
         searchView()
         observeLiveData()
 
-        //TODO click listenerlari ayri methodlara alirsak daha okunur olur.
-        clickMethod()
-    }
-
-    private fun clickMethod() {
         binding.homeScreenAddButton.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToAddBookFragment()
-            findNavController().navigate(action)
+            navigateToAddBookScreen()
         }
 
         binding.homeScreenToolBar.homeToolBarProfile.setOnClickListener {
@@ -54,9 +48,18 @@ class HomeFragment : Fragment(), BookAdapter.Listener {
         }
 
         binding.homeScreenToolBar.homeToolBarStarBook.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToSuggestionBookFragment()
-            findNavController().navigate(action)
+            navigateToSuggestionBookScreen()
         }
+    }
+
+    private fun navigateToSuggestionBookScreen() {
+        val action = HomeFragmentDirections.actionHomeFragmentToSuggestionBookFragment()
+        findNavController().navigate(action)
+    }
+
+    private fun navigateToAddBookScreen() {
+        val action = HomeFragmentDirections.actionHomeFragmentToAddBookFragment()
+        findNavController().navigate(action)
     }
 
     private fun searchView() {

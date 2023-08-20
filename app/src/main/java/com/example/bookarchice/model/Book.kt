@@ -11,7 +11,5 @@ data class Book(
     val bookPublisher: String? = null,
     val bookMessage: String? = null,
     val bookDate: String? = null,
-    val userId: String
-) : Serializable{
-
-}
+    val userId: String? = null
+) : Serializable

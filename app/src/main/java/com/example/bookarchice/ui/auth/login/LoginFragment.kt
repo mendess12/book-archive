@@ -35,14 +35,19 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private fun setOnClickMethod() {
         binding.apply {
+            // TODO ayri bir method
             loginScreenRegisterTv.setOnClickListener {
                 val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
                 Navigation.findNavController(it).navigate(action)
             }
+
+            // TODO ayri bir method
             loginScreenForgotPasswordTv.setOnClickListener {
                 val action = LoginFragmentDirections.actionLoginFragmentToForgotPasswordFragment()
                 Navigation.findNavController(it).navigate(action)
             }
+
+            // TODO click listeneri ayri bir methoda alalim
             loginScreenLoginButton.setOnClickListener {
                 val email = binding.loginScreenEmailEt.text.toString().trim()
                 val password = binding.loginScreenPasswordEt.text.toString().trim()

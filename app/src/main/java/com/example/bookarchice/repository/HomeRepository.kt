@@ -8,24 +8,23 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.tasks.await
 
-// TODO Repo katmanina Livedata(android componentleri girmez)
-// TODO Firebase Auth ve FirebaseFirestore Constructordan verilir(Dependency Injection)
-// TODO Task donmektense, coroutine extension kutuphanesi eklenecek
+// Dagger Hilt takilarak Butun Repositorylere fieldlar ordan verilecek
 class HomeRepository(private var database: FirebaseFirestore) {
-
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private val const = BookConstants
 
     suspend fun addBookData(book: Book): DocumentReference {
-        return database.collection(const.BOOKS).add(book).await()
+        return database.collection(BookConstants.BOOKS).add(book).await()
     }
 
-    suspend fun getBookList(): QuerySnapshot {
+    suspend fun getBookList(): List<Book> {
         val uid = auth.currentUser?.uid
-        return database.collection(const.BOOKS).whereEqualTo("userId", uid).get().await()
+        return database.collection(BookConstants.BOOKS).whereEqualTo("userId", uid)
+            .get()
+            .await()
+            .toObjects(Book::class.java)
     }
 
     suspend fun getSuggestionList(): QuerySnapshot {
-        return database.collection(const.SUGGESTION).get().await()
+        return database.collection(BookConstants.SUGGESTION).get().await()
     }
 }

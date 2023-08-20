@@ -11,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.bookarchice.R
 import com.example.bookarchice.databinding.FragmentAddBookBinding
 import com.example.bookarchice.model.Book
+import com.example.bookarchice.util.extensions.showOrHide
 import com.example.bookarchice.util.showSnackBar
 import com.google.firebase.auth.FirebaseAuth
 
@@ -19,7 +20,6 @@ class AddBookFragment : Fragment() {
     private lateinit var binding: FragmentAddBookBinding
     private val args: AddBookFragmentArgs by navArgs()
     private val viewModel: AddBookViewModel by viewModels()
-    private var bookArgs: Book? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,25 +31,27 @@ class AddBookFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAddBookBinding.bind(view)
-        bookArgs = args.book
 
 
-        if (bookArgs == null) {
+        val book = args.book
+        binding.addBookScreenAddButton.showOrHide(book != null)
+        if (book == null) {
             binding.addBookScreenAddButton.setOnClickListener {
                 setBookData()
                 observeLiveData()
             }
         } else {
             binding.apply {
-                binding.addBookScreenAddButton.visibility = View.INVISIBLE
-                addBookScreenBookName.setText(args.book?.bookName.toString())
-                binding.addBookScreenBookAuthor.setText(args.book?.bookAuthor)
-                addBookScreenPageNumber.setText(args.book?.pageNumber)
-                addBookScreenBookType.setText(args.book?.bookType)
-                addBookScreenBookLanguage.setText(args.book?.bookLanguage)
-                addBookScreenBookPublisher.setText(args.book?.bookPublisher)
-                addBookScreenBookMessage.setText(args.book?.bookMessage)
-                addBookScreenBookDate.setText(args.book?.bookDate)
+                with(book){
+                    addBookScreenBookName.setText(bookName.toString())
+                    addBookScreenBookAuthor.setText(bookAuthor)
+                    addBookScreenPageNumber.setText(pageNumber)
+                    addBookScreenBookType.setText(bookType)
+                    addBookScreenBookLanguage.setText(bookLanguage)
+                    addBookScreenBookPublisher.setText(bookPublisher)
+                    addBookScreenBookMessage.setText(bookMessage)
+                    addBookScreenBookDate.setText(bookDate)
+                }
             }
         }
 
@@ -59,7 +61,6 @@ class AddBookFragment : Fragment() {
     }
 
     private fun setBookData() {
-
         val name = binding.addBookScreenBookName.text.toString()
         val author = binding.addBookScreenBookAuthor.text.toString()
         val pageNumber = binding.addBookScreenPageNumber.text.toString()
@@ -68,25 +69,16 @@ class AddBookFragment : Fragment() {
         val publisher = binding.addBookScreenBookPublisher.text.toString()
         val message = binding.addBookScreenBookMessage.text.toString()
         val date = binding.addBookScreenBookDate.text.toString()
-        val uuid = FirebaseAuth.getInstance().currentUser?.uid
+        val uuid = FirebaseAuth.getInstance().currentUser?.uid ?: return
 
-        val book =
-            uuid?.let {
-                Book(
-                    name, author, pageNumber, type, language, publisher, message, date,
-                    it
-                )
-            }
-        if (book != null) {
-            viewModel.addBookDataFromFirebase(book)
-        }
+        val book = Book( name, author, pageNumber, type, language, publisher, message, date, uuid)
+        viewModel.addBookDataFromFirebase(book)
     }
 
     private fun observeLiveData() {
         viewModel.addLiveData.observe(viewLifecycleOwner) {
             if (it != null) {
-                val action = AddBookFragmentDirections.actionAddBookFragmentToHomeFragment()
-                findNavController().navigate(action)
+                findNavController().navigateUp()
             } else {
                 view?.showSnackBar("Failed!")
             }
