@@ -14,28 +14,12 @@ class SuggestionBookViewModel : ViewModel() {
     private val homeRepository = HomeRepository(FirebaseFirestore.getInstance())
     var suggestionLiveData: MutableLiveData<List<SuggestionBook>?> = MutableLiveData()
 
-    // TODO Burasi direk objeye parse olacak
+    // TODO Burasi direk objeye parse olacak -> yapıldı
     fun getSuggestionBookDataFromRepository() {
         viewModelScope.launch {
             try {
                 val result = homeRepository.getSuggestionList()
-                val suggestionList = mutableListOf<SuggestionBook>()
-                for (document in result) {
-                    val name = document.getString("name")
-                    val author = document.getString("author")
-                    val pageNumber = document.getString("subject")
-                    val type = document.getString("type")
-
-                    suggestionList.add(
-                        SuggestionBook(
-                            name,
-                            author,
-                            pageNumber,
-                            type
-                        )
-                    )
-                }
-                suggestionLiveData.postValue(suggestionList)
+                suggestionLiveData.postValue(result)
             } catch (exception: Exception) {
                 logDebug("Error Suggestion", exception.toString())
                 suggestionLiveData.postValue(null)
