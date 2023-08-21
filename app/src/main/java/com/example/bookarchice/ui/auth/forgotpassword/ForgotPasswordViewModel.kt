@@ -5,16 +5,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bookarchice.repository.AuthRepository
 import com.example.bookarchice.util.logDebug
-import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.lang.Exception
+import javax.inject.Inject
 
-class ForgotPasswordViewModel : ViewModel() {
+@HiltViewModel
+class ForgotPasswordViewModel @Inject constructor(private val authRepository: AuthRepository) :
+    ViewModel() {
 
     private val forgotPasswordLogTitle = "Error Forgot Password"
-    private val authRepository = AuthRepository(
-        FirebaseAuth.getInstance()
-    )
     var forgotPasswordLiveData = MutableLiveData<String?>()
 
     fun getForgotPasswordDataFromRepository(email: String) {

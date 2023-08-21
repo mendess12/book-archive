@@ -10,7 +10,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.bookarchice.R
 import com.example.bookarchice.databinding.FragmentForgotPasswordBinding
 import com.example.bookarchice.util.showSnackBar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ForgotPasswordFragment : Fragment(R.layout.fragment_forgot_password) {
 
     private lateinit var binding: FragmentForgotPasswordBinding
@@ -71,7 +73,7 @@ class ForgotPasswordFragment : Fragment(R.layout.fragment_forgot_password) {
             if (it != null) {
                 view?.showSnackBar("Link sent to $email this email. Please check your email!")
                 // TODO geri islemi yapiliyor aslinda, onu navigateUpa cevir veya popBackStack -> yapıldı
-                    findNavController().popBackStack()
+                findNavController().popBackStack()
             } else {
                 view?.showSnackBar("Check your email")
             }

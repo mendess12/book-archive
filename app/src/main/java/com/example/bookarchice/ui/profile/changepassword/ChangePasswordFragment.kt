@@ -11,7 +11,9 @@ import com.example.bookarchice.R
 import com.example.bookarchice.databinding.FragmentChangePasswordBinding
 import com.example.bookarchice.util.showSnackBar
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ChangePasswordFragment : Fragment() {
 
     private lateinit var binding: FragmentChangePasswordBinding

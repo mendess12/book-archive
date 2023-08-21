@@ -14,7 +14,9 @@ import com.example.bookarchice.model.Book
 import com.example.bookarchice.util.extensions.showOrHide
 import com.example.bookarchice.util.showSnackBar
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddBookFragment : Fragment() {
 
     private lateinit var binding: FragmentAddBookBinding

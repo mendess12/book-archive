@@ -6,14 +6,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bookarchice.model.Book
 import com.example.bookarchice.repository.HomeRepository
-import com.google.firebase.firestore.FirebaseFirestore
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.lang.Exception
+import javax.inject.Inject
 
 //TODO Butun viewmodellara Dagger Hilt eklendikten sonra constructor injection yapilacak
-class AddBookViewModel : ViewModel() {
-
-    private val homeRepository = HomeRepository(FirebaseFirestore.getInstance())
+@HiltViewModel
+class AddBookViewModel @Inject constructor(private val homeRepository: HomeRepository) :
+    ViewModel() {
 
     var addLiveData = MutableLiveData<String?>()
 

@@ -15,7 +15,9 @@ import com.example.bookarchice.databinding.FragmentHomeBinding
 import com.example.bookarchice.model.Book
 import com.example.bookarchice.util.showSnackBar
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(), BookAdapter.Listener {
 
     private lateinit var binding: FragmentHomeBinding

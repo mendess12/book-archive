@@ -5,14 +5,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bookarchice.repository.AuthRepository
 import com.example.bookarchice.util.logDebug
-import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LoginViewModel : ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor(private val authRepository: AuthRepository) : ViewModel() {
+
     private val loginLogTitle = "Error Login"
-    private val authRepository = AuthRepository(
-        FirebaseAuth.getInstance()
-    )
     var loginLiveData = MutableLiveData<String?>()
 
     fun getLoginDataFromRepository(email: String, password: String) {
@@ -20,7 +20,7 @@ class LoginViewModel : ViewModel() {
             try {
                 val result = authRepository.login(email, password)
                 loginLiveData.postValue(result.toString())
-            }catch (exception: Exception){
+            } catch (exception: Exception) {
                 logDebug(loginLogTitle, exception.toString())
                 loginLiveData.postValue(null)
             }

@@ -6,12 +6,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.bookarchice.model.SuggestionBook
 import com.example.bookarchice.repository.HomeRepository
 import com.example.bookarchice.util.logDebug
-import com.google.firebase.firestore.FirebaseFirestore
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SuggestionBookViewModel : ViewModel() {
+@HiltViewModel
+class SuggestionBookViewModel @Inject constructor(private val homeRepository: HomeRepository) : ViewModel() {
 
-    private val homeRepository = HomeRepository(FirebaseFirestore.getInstance())
     var suggestionLiveData: MutableLiveData<List<SuggestionBook>?> = MutableLiveData()
 
     // TODO Burasi direk objeye parse olacak -> yapıldı

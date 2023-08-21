@@ -11,7 +11,9 @@ import com.example.bookarchice.R
 import com.example.bookarchice.databinding.FragmentLoginBinding
 import com.example.bookarchice.util.showSnackBar
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private lateinit var binding: FragmentLoginBinding

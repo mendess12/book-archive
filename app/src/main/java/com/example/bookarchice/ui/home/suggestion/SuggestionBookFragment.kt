@@ -12,7 +12,9 @@ import com.example.bookarchice.R
 import com.example.bookarchice.adapter.SuggestionAdapter
 import com.example.bookarchice.databinding.FragmentSuggestionBookBinding
 import com.example.bookarchice.util.showSnackBar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SuggestionBookFragment : Fragment() {
 
     private lateinit var binding: FragmentSuggestionBookBinding

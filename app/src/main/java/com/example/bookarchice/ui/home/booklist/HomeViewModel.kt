@@ -7,14 +7,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.bookarchice.model.Book
 import com.example.bookarchice.repository.HomeRepository
 import com.example.bookarchice.util.logDebug
-import com.google.firebase.firestore.FirebaseFirestore
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor(private val homeRepository: HomeRepository) : ViewModel() {
 
-    private val homeRepository = HomeRepository(FirebaseFirestore.getInstance())
     var booksLiveData: MutableLiveData<List<Book>?> = MutableLiveData()
-
 
     fun getBookDataFromRepository() {
         viewModelScope.launch {
@@ -23,13 +23,13 @@ class HomeViewModel : ViewModel() {
                 booksLiveData.postValue(result)
             } catch (exception: Exception) {
                 booksLiveData.postValue(null)
-                Log.e(TAG,"$exception")
+                Log.e(TAG, "$exception")
                 logDebug("Home message", exception.toString())
             }
         }
     }
 
-    companion object{
+    companion object {
         private const val TAG = "HomeViewModel"
     }
 }

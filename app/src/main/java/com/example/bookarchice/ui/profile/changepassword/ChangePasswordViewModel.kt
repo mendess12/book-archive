@@ -7,13 +7,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.bookarchice.databinding.FragmentChangePasswordBinding
 import com.example.bookarchice.repository.ProfileRepository
 import com.example.bookarchice.util.showSnackBar
-import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ChangePasswordViewModel : ViewModel() {
-    private val profileRepository = ProfileRepository(
-        FirebaseAuth.getInstance()
-    )
+@HiltViewModel
+class ChangePasswordViewModel @Inject constructor(private val profileRepository: ProfileRepository) :
+    ViewModel() {
 
     var changePasswordErrorLiveData = MutableLiveData<Throwable?>()
     private val message = "6 char password required"
@@ -49,7 +49,7 @@ class ChangePasswordViewModel : ViewModel() {
             try {
                 profileRepository.changePassword(password, newPassword)
                 changePasswordErrorLiveData.postValue(null)
-            }catch (ex: Exception){
+            } catch (ex: Exception) {
                 changePasswordErrorLiveData.postValue(ex)
             }
         }

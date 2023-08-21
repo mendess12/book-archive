@@ -5,15 +5,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bookarchice.repository.AuthRepository
 import com.example.bookarchice.util.logDebug
-import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RegisterViewModel : ViewModel() {
+@HiltViewModel
+class RegisterViewModel @Inject constructor(private val authRepository: AuthRepository) : ViewModel() {
 
     private val registerLogTitle = "Error Register"
-    private val authRepository = AuthRepository(
-        FirebaseAuth.getInstance()
-    )
     var registerLiveData = MutableLiveData<String?>()
 
     fun getRegisterDataFromRepository(email: String, password: String) {
