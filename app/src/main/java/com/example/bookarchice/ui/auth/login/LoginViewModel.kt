@@ -1,10 +1,8 @@
 package com.example.bookarchice.ui.auth.login
 
-import android.util.Patterns
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bookarchice.databinding.FragmentLoginBinding
 import com.example.bookarchice.repository.AuthRepository
 import com.example.bookarchice.util.logDebug
 import com.google.firebase.auth.FirebaseAuth

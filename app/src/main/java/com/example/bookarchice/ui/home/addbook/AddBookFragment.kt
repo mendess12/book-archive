@@ -34,7 +34,6 @@ class AddBookFragment : Fragment() {
 
 
         val book = args.book
-        binding.addBookScreenAddButton.showOrHide(book != null)
         if (book == null) {
             binding.addBookScreenAddButton.setOnClickListener {
                 setBookData()
@@ -53,6 +52,7 @@ class AddBookFragment : Fragment() {
                     addBookScreenBookDate.setText(bookDate)
                 }
             }
+            binding.addBookScreenAddButton.showOrHide(false)
         }
 
         binding.addBookScreenToolBar.backToolBar.setOnClickListener {
