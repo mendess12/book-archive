@@ -26,20 +26,12 @@
         android:id="@+id/registerFragment"
         android:name="com.example.bookarchice.ui.auth.register.RegisterFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register">
-        <action
-            android:id="@+id/action_registerFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_register"/>
     <fragment
         android:id="@+id/forgotPasswordFragment"
         android:name="com.example.bookarchice.ui.auth.forgotpassword.ForgotPasswordFragment"
         android:label="fragment_forgot_password"
-        tools:layout="@layout/fragment_forgot_password">
-        <action
-            android:id="@+id/action_forgotPasswordFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_forgot_password"/>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.bookarchice.ui.home.booklist.HomeFragment"
@@ -53,7 +45,9 @@
             app:destination="@id/changePasswordFragment" />
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_homeFragment_to_suggestionBookFragment"
             app:destination="@id/suggestionBookFragment" />
