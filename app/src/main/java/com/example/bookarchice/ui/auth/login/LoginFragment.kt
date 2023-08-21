@@ -4,11 +4,8 @@ import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.bookarchice.R
 import com.example.bookarchice.databinding.FragmentLoginBinding
@@ -35,31 +32,47 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private fun setOnClickMethod() {
         binding.apply {
-            // TODO ayri bir method
+            // TODO ayri bir method -> yapıldı
             loginScreenRegisterTv.setOnClickListener {
-                val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
-                Navigation.findNavController(it).navigate(action)
+                navigateToRegister()
             }
 
-            // TODO ayri bir method
+            // TODO ayri bir method -> yapıldı
             loginScreenForgotPasswordTv.setOnClickListener {
-                val action = LoginFragmentDirections.actionLoginFragmentToForgotPasswordFragment()
-                Navigation.findNavController(it).navigate(action)
+                navigateToForgotPassword()
             }
 
-            // TODO click listeneri ayri bir methoda alalim
+            // TODO click listeneri ayri bir methoda alalim -> yapıldı
             loginScreenLoginButton.setOnClickListener {
-                val email = binding.loginScreenEmailEt.text.toString().trim()
-                val password = binding.loginScreenPasswordEt.text.toString().trim()
-
-                if (isEligibleToLogin(binding, email, password)){
-                    viewModel.getLoginDataFromRepository(email, password)
-                }
+                loginButton()
             }
         }
     }
 
-    private fun isEligibleToLogin(binding: FragmentLoginBinding, email: String, password: String): Boolean{
+    private fun navigateToRegister() {
+        val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
+        findNavController().navigate(action)
+    }
+
+    private fun navigateToForgotPassword() {
+        val action = LoginFragmentDirections.actionLoginFragmentToForgotPasswordFragment()
+        findNavController().navigate(action)
+    }
+
+    private fun loginButton() {
+        val email = binding.loginScreenEmailEt.text.toString().trim()
+        val password = binding.loginScreenPasswordEt.text.toString().trim()
+
+        if (isEligibleToLogin(binding, email, password)) {
+            viewModel.getLoginDataFromRepository(email, password)
+        }
+    }
+
+    private fun isEligibleToLogin(
+        binding: FragmentLoginBinding,
+        email: String,
+        password: String
+    ): Boolean {
         if (email.isEmpty()) {
             binding.loginScreenEmailEt.error = "Email required"
             binding.loginScreenEmailEt.requestFocus()
@@ -81,7 +94,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private fun observeLiveData() {
         viewModel.loginLiveData.observe(viewLifecycleOwner) {
-            Log.e(TAG,"Result = $it")
+            Log.e(TAG, "Result = $it")
             if (it != null) {
                 val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
                 findNavController().navigate(action)
@@ -91,7 +104,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
     }
 
-    companion object{
+    companion object {
         private const val TAG = "LoginFragment"
     }
 }

@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.bookarchice.R
@@ -30,15 +28,23 @@ class ForgotPasswordFragment : Fragment(R.layout.fragment_forgot_password) {
     private fun setOnClickMethod() {
         binding.apply {
             forgotPasswordScreenToolBar.backToolBar.setOnClickListener {
-                findNavController().popBackStack()
+                navigateToBack()
             }
             forgotPasswordScreenForgotPasswordButton.setOnClickListener {
-                email = binding.forgotPasswordScreenEmailEt.text.toString().trim()
-
-                if (isEligibleToForgotPassword(binding, email)) {
-                    viewModel.getForgotPasswordDataFromRepository(email)
-                }
+                forgotPasswordButton()
             }
+        }
+    }
+
+    private fun navigateToBack() {
+        findNavController().popBackStack()
+    }
+
+    private fun forgotPasswordButton() {
+        email = binding.forgotPasswordScreenEmailEt.text.toString().trim()
+
+        if (isEligibleToForgotPassword(binding, email)) {
+            viewModel.getForgotPasswordDataFromRepository(email)
         }
     }
 
@@ -61,13 +67,11 @@ class ForgotPasswordFragment : Fragment(R.layout.fragment_forgot_password) {
 
     private fun observeLiveData() {
         viewModel.forgotPasswordLiveData.observe(viewLifecycleOwner) {
-            Log.e("ForgotPassword","$Result = $it")
+            Log.e("ForgotPassword", "$Result = $it")
             if (it != null) {
                 view?.showSnackBar("Link sent to $email this email. Please check your email!")
-                // TODO geri islemi yapiliyor aslinda, onu navigateUpa cevir veya popBackStack
-                val action =
-                    ForgotPasswordFragmentDirections.actionForgotPasswordFragmentToLoginFragment()
-                findNavController().navigate(action)
+                // TODO geri islemi yapiliyor aslinda, onu navigateUpa cevir veya popBackStack -> yapıldı
+                    findNavController().popBackStack()
             } else {
                 view?.showSnackBar("Check your email")
             }

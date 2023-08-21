@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.bookarchice.R
 import com.example.bookarchice.databinding.FragmentRegisterBinding
@@ -35,18 +34,25 @@ class RegisterFragment : Fragment() {
     private fun setOnClickMethod() {
         binding.apply {
             registerScreenLoginTv.setOnClickListener {
-                val action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
-                Navigation.findNavController(it).navigate(action)
+                navigateToLogin()
             }
             registerScreenRegisterButton.setOnClickListener {
-                val email = binding.registerScreenEmailEt.text.toString().trim()
-                val password = binding.registerScreenPasswordEt.text.toString().trim()
-                val userName = binding.registerScreenUserNameEt.text.toString().trim()
-
-                if (isEligibleToRegister(binding, email, password, userName)) {
-                    viewModel.getRegisterDataFromRepository(email, password)
-                }
+                registerButton()
             }
+        }
+    }
+
+    private fun navigateToLogin() {
+        findNavController().popBackStack()
+    }
+
+    private fun registerButton() {
+        val email = binding.registerScreenEmailEt.text.toString().trim()
+        val password = binding.registerScreenPasswordEt.text.toString().trim()
+        val userName = binding.registerScreenUserNameEt.text.toString().trim()
+
+        if (isEligibleToRegister(binding, email, password, userName)) {
+            viewModel.getRegisterDataFromRepository(email, password)
         }
     }
 
@@ -82,8 +88,7 @@ class RegisterFragment : Fragment() {
     private fun observeLiveData() {
         viewModel.registerLiveData.observe(viewLifecycleOwner) {
             if (it != null) {
-                val action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
-                findNavController().navigate(action)
+                findNavController().popBackStack()
             } else {
                 view?.showSnackBar("Check your email, password and user name!")
             }
