@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(), BookAdapter.Listener {
+class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeViewModel by viewModels()
@@ -36,7 +36,7 @@ class HomeFragment : Fragment(), BookAdapter.Listener {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
 
-        bookAdapter = BookAdapter(this@HomeFragment)
+        bookAdapter = BookAdapter(::onItemClick)
         binding.recyclerView.adapter = bookAdapter
         searchView()
         observeLiveData()
@@ -119,7 +119,7 @@ class HomeFragment : Fragment(), BookAdapter.Listener {
         }
     }
 
-    override fun onItemClick(bookList: Book) {
+    private fun onItemClick(bookList: Book) {
         val action = HomeFragmentDirections.actionHomeFragmentToAddBookFragment(bookList)
         findNavController().navigate(action)
     }

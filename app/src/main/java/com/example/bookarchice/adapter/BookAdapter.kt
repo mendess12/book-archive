@@ -9,22 +9,20 @@ import com.example.bookarchice.databinding.RecyclerItemBinding
 import com.example.bookarchice.model.Book
 import java.util.Locale
 
-// TODO Listener yerine nullable lambda function
-class BookAdapter(private val listener: Listener) :
+class BookAdapter(private val onClick: (Book) -> Unit) :
     RecyclerView.Adapter<BookAdapter.MyViewHolder>(), Filterable {
 
     var bookList: MutableList<Book> = arrayListOf()
     var filterList: MutableList<Book> = arrayListOf()
 
-    interface Listener {
-        fun onItemClick(bookList: Book)
-    }
 
     inner class MyViewHolder(val binding: RecyclerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(bookList: Book, listener: Listener) {
+        fun bind(book: Book) {
+            binding.recyclerItemBookName.text = book.bookName
+            binding.recyclerItemBookAuthor.text = book.bookAuthor
             itemView.setOnClickListener {
-                listener.onItemClick(bookList)
+                onClick.invoke(book)
             }
         }
     }
@@ -41,13 +39,7 @@ class BookAdapter(private val listener: Listener) :
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val book = this.filterList[position]
-        val binding = holder.binding
-        holder.bind(book, listener)
-        binding.recyclerItemBookName.text = book.bookName
-        binding.recyclerItemBookAuthor.text = book.bookAuthor
-        holder.itemView.setOnClickListener {
-            listener.onItemClick(book)
-        }
+        holder.bind(book)
     }
 
     override fun getFilter(): Filter {
