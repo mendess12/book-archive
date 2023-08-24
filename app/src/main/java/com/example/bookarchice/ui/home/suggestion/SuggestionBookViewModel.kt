@@ -15,7 +15,6 @@ class SuggestionBookViewModel @Inject constructor(private val homeRepository: Ho
 
     var suggestionLiveData: MutableLiveData<List<SuggestionBook>?> = MutableLiveData()
 
-    // TODO Burasi direk objeye parse olacak -> yapıldı
     fun getSuggestionBookDataFromRepository() {
         viewModelScope.launch {
             try {

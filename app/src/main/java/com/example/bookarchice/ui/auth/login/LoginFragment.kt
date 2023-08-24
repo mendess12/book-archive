@@ -28,28 +28,24 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
             findNavController().navigate(action)
         }
-        setOnClickMethod()
-        observeLiveData()
-    }
 
-    private fun setOnClickMethod() {
         binding.apply {
-            // TODO ayri bir method -> yapıldı
             loginScreenRegisterTv.setOnClickListener {
                 navigateToRegister()
             }
 
-            // TODO ayri bir method -> yapıldı
             loginScreenForgotPasswordTv.setOnClickListener {
                 navigateToForgotPassword()
             }
 
-            // TODO click listeneri ayri bir methoda alalim -> yapıldı
             loginScreenLoginButton.setOnClickListener {
                 loginButton()
             }
         }
+
+        observeLiveData()
     }
+
 
     private fun navigateToRegister() {
         val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
@@ -96,7 +92,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private fun observeLiveData() {
         viewModel.loginLiveData.observe(viewLifecycleOwner) {
-            Log.e(TAG, "Result = $it")
             if (it != null) {
                 val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
                 findNavController().navigate(action)

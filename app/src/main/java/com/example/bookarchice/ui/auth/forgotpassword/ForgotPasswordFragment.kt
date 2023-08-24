@@ -1,7 +1,6 @@
 package com.example.bookarchice.ui.auth.forgotpassword
 
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -33,7 +32,7 @@ class ForgotPasswordFragment : Fragment(R.layout.fragment_forgot_password) {
                 navigateToBack()
             }
             forgotPasswordScreenForgotPasswordButton.setOnClickListener {
-                forgotPasswordButton()
+                onPasswordForgot()
             }
         }
     }
@@ -42,7 +41,7 @@ class ForgotPasswordFragment : Fragment(R.layout.fragment_forgot_password) {
         findNavController().popBackStack()
     }
 
-    private fun forgotPasswordButton() {
+    private fun onPasswordForgot() {
         email = binding.forgotPasswordScreenEmailEt.text.toString().trim()
 
         if (isEligibleToForgotPassword(binding, email)) {
@@ -69,10 +68,8 @@ class ForgotPasswordFragment : Fragment(R.layout.fragment_forgot_password) {
 
     private fun observeLiveData() {
         viewModel.forgotPasswordLiveData.observe(viewLifecycleOwner) {
-            Log.e("ForgotPassword", "$Result = $it")
             if (it != null) {
                 view?.showSnackBar("Link sent to $email this email. Please check your email!")
-                // TODO geri islemi yapiliyor aslinda, onu navigateUpa cevir veya popBackStack -> yapıldı
                 findNavController().popBackStack()
             } else {
                 view?.showSnackBar("Check your email")

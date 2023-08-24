@@ -29,11 +29,7 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentRegisterBinding.bind(view)
-        setOnClickMethod()
-        observeLiveData()
-    }
 
-    private fun setOnClickMethod() {
         binding.apply {
             registerScreenLoginTv.setOnClickListener {
                 navigateToLogin()
@@ -42,6 +38,8 @@ class RegisterFragment : Fragment() {
                 registerButton()
             }
         }
+
+        observeLiveData()
     }
 
     private fun navigateToLogin() {

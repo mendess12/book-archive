@@ -73,7 +73,7 @@ class AddBookFragment : Fragment() {
         val date = binding.addBookScreenBookDate.text.toString()
         val uuid = FirebaseAuth.getInstance().currentUser?.uid ?: return
 
-        val book = Book( name, author, pageNumber, type, language, publisher, message, date, uuid)
+        val book = Book(name, author, pageNumber, type, language, publisher, message, date, uuid)
         viewModel.addBookDataFromFirebase(book)
     }
 

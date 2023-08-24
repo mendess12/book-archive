@@ -11,7 +11,6 @@ import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
 
-//TODO Butun viewmodellara Dagger Hilt eklendikten sonra constructor injection yapilacak
 @HiltViewModel
 class AddBookViewModel @Inject constructor(private val homeRepository: HomeRepository) :
     ViewModel() {
