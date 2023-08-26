@@ -1,6 +1,5 @@
 package com.example.bookarchice.repository
 
-import com.example.bookarchice.di.NetworkModule
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await

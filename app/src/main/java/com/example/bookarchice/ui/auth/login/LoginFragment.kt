@@ -1,7 +1,6 @@
 package com.example.bookarchice.ui.auth.login
 
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.View
