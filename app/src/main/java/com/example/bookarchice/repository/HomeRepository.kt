@@ -9,6 +9,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
+//TODO auth constructordan verilecek
 class HomeRepository @Inject constructor(private val firebaseDataStore: FirebaseFirestore) {
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
