@@ -33,24 +33,28 @@ class ChangePasswordFragment : Fragment() {
 
         // TODO ayri bit method
         binding.changePasswordScreenChangeButton.setOnClickListener {
-            val password = binding.changePasswordScreenPasswordEt.text.toString().trim()
-            val newPassword = binding.changePasswordScreenNewPasswordEt.text.toString().trim()
-            val retypeNewPassword =
-                binding.changePasswordScreenRetypeNewPasswordEt.text.toString().trim()
-
-            viewModel.getChangePasswordDataFromRepository(
-                view,
-                binding,
-                password,
-                newPassword,
-                retypeNewPassword
-            )
+            onPasswordChange(view)
         }
         observeLiveData()
 
         binding.changePasswordScreenToolBar.backToolBar.setOnClickListener {
             findNavController().popBackStack()
         }
+    }
+
+    private fun onPasswordChange(view: View) {
+        val password = binding.changePasswordScreenPasswordEt.text.toString().trim()
+        val newPassword = binding.changePasswordScreenNewPasswordEt.text.toString().trim()
+        val retypeNewPassword =
+            binding.changePasswordScreenRetypeNewPasswordEt.text.toString().trim()
+
+        viewModel.getChangePasswordDataFromRepository(
+            view,
+            binding,
+            password,
+            newPassword,
+            retypeNewPassword
+        )
     }
 
     private fun observeLiveData() {
