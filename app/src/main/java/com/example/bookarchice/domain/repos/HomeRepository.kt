@@ -10,5 +10,6 @@ interface HomeRepository {
 
     suspend fun getBookList(): List<Book>
 
+    //TODO bunun icin use case
     suspend fun getSuggestionList(): List<SuggestionBook>
 }

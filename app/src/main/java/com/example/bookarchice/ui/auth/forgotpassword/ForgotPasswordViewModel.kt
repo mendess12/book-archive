@@ -3,8 +3,8 @@ package com.example.bookarchice.ui.auth.forgotpassword
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bookarchice.domain.usecases.ForgotPasswordParams
-import com.example.bookarchice.domain.usecases.ForgotPasswordUseCase
+import com.example.bookarchice.domain.usecases.auth.ForgotPasswordParams
+import com.example.bookarchice.domain.usecases.auth.ForgotPasswordUseCase
 import com.example.bookarchice.util.logDebug
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

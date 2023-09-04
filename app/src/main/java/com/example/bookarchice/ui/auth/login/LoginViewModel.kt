@@ -3,8 +3,8 @@ package com.example.bookarchice.ui.auth.login
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bookarchice.domain.usecases.LoginParams
-import com.example.bookarchice.domain.usecases.LoginUseCase
+import com.example.bookarchice.domain.usecases.auth.LoginParams
+import com.example.bookarchice.domain.usecases.auth.LoginUseCase
 import com.example.bookarchice.util.logDebug
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

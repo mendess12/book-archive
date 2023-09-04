@@ -11,10 +11,11 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import javax.inject.Singleton
 
-//TODO auth constructordan verilecek
 @Singleton
-class HomeRepositoryImpl @Inject constructor(private val firebaseDataStore: FirebaseFirestore,private val auth: FirebaseAuth) :
-    HomeRepository {
+class HomeRepositoryImpl @Inject constructor(
+    private val firebaseDataStore: FirebaseFirestore,
+    private val auth: FirebaseAuth
+) : HomeRepository {
 
     override suspend fun addBookData(book: Book): DocumentReference {
         return firebaseDataStore.collection(BookConstants.BOOKS).add(book)

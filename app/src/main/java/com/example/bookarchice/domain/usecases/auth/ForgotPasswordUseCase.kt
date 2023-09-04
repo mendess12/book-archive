@@ -1,4 +1,4 @@
-package com.example.bookarchice.domain.usecases
+package com.example.bookarchice.domain.usecases.auth
 
 import com.example.bookarchice.domain.SuspendUseCase
 import com.example.bookarchice.domain.repos.AuthRepository

@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bookarchice.domain.usecases.homeusecases.AddBookParams
-import com.example.bookarchice.domain.usecases.homeusecases.AddBookUseCase
+import com.example.bookarchice.domain.usecases.home.AddBookParams
+import com.example.bookarchice.domain.usecases.home.AddBookUseCase
 import com.example.bookarchice.model.Book
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

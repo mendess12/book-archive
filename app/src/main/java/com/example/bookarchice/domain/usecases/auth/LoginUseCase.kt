@@ -1,4 +1,4 @@
-package com.example.bookarchice.domain.usecases
+package com.example.bookarchice.domain.usecases.auth
 
 import com.example.bookarchice.domain.SuspendUseCase
 import com.example.bookarchice.domain.repos.AuthRepository
@@ -12,7 +12,6 @@ class LoginUseCase @Inject constructor(
     override suspend fun execute(params: LoginParams): AuthResult {
         return authRepository.login(params.email, params.password)
     }
-
 }
 
 data class LoginParams(val email: String, val password: String)
