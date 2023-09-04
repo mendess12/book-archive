@@ -5,14 +5,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bookarchice.databinding.FragmentChangePasswordBinding
-import com.example.bookarchice.repository.ProfileRepository
+import com.example.bookarchice.domain.usecases.profile.ChangePasswordParams
+import com.example.bookarchice.domain.usecases.profile.ChangePasswordUseCase
 import com.example.bookarchice.util.showSnackBar
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ChangePasswordViewModel @Inject constructor(private val profileRepository: ProfileRepository) :
+class ChangePasswordViewModel @Inject constructor(private val changePasswordUseCase: ChangePasswordUseCase) :
     ViewModel() {
 
     var changePasswordErrorLiveData = MutableLiveData<Throwable?>()
@@ -47,7 +48,7 @@ class ChangePasswordViewModel @Inject constructor(private val profileRepository:
 
         viewModelScope.launch {
             try {
-                profileRepository.changePassword(password, newPassword)
+                changePasswordUseCase(ChangePasswordParams(password, newPassword))
                 changePasswordErrorLiveData.postValue(null)
             } catch (ex: Exception) {
                 changePasswordErrorLiveData.postValue(ex)
