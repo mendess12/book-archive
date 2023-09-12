@@ -90,13 +90,14 @@
 
 ## UI Tasarımları
 ### Auth
-![login](https://github.com/mendess12/book-archive/assets/76566952/d6f0f9a3-6a40-4f26-aabe-f196519e71b2) ![register](https://github.com/mendess12/book-archive/assets/76566952/3f8c5513-0deb-45dd-88de-d66d9490e1ed) ![forgot-password](https://github.com/mendess12/book-archive/assets/76566952/f0bde6a5-5bc1-4976-beeb-37b69b7ec031)  ![change-password](https://github.com/mendess12/book-archive/assets/76566952/7a230087-f216-417d-83be-86cd2f75c91d)
+![login](https://github.com/mendess12/book-archive/assets/76566952/a44b1642-f4fa-4a7e-aec8-08e6be98ce2b) ![register](https://github.com/mendess12/book-archive/assets/76566952/f0fc7b6e-95b3-4474-bfe0-18eed42ce8e6) ![forgot-password](https://github.com/mendess12/book-archive/assets/76566952/605493dc-878d-44bb-b4d3-7043c7747018) ![change-password](https://github.com/mendess12/book-archive/assets/76566952/dcde3b5d-59eb-40bf-b294-d9196e9ff410)
 
 ### Home
-![home](https://github.com/mendess12/book-archive/assets/76566952/90e557ad-043c-4714-8d73-70ad009d7bfc) ![search](https://github.com/mendess12/book-archive/assets/76566952/ad6098af-8470-409d-b680-63a55cf30eb6) ![book-detail](https://github.com/mendess12/book-archive/assets/76566952/b4791fd9-ea88-42a2-bdbf-6a848b53d994) ![add-book](https://github.com/mendess12/book-archive/assets/76566952/0a74fe09-5a09-4b24-b2b5-21aef8f20d9a)
+![home](https://github.com/mendess12/book-archive/assets/76566952/6a1ad1f8-4dc1-4e3e-8608-51b6bf217c87) ![add-book](https://github.com/mendess12/book-archive/assets/76566952/50db9058-889d-4711-982e-f1af632855f8) ![book-detail](https://github.com/mendess12/book-archive/assets/76566952/fb375a72-511a-4379-b315-f0626c5c9ecf) ![search](https://github.com/mendess12/book-archive/assets/76566952/8650581d-f8ec-4849-86b2-39fa0a8aad3f)
 
 ### Suggestion 
-![suggestion](https://github.com/mendess12/book-archive/assets/76566952/cf99520e-fb44-4227-a192-bfce9674bd38)
+![suggestion](https://github.com/mendess12/book-archive/assets/76566952/75479573-81fc-4c61-9bba-5db2ffdf6f96)
+
 
 
 
