@@ -91,10 +91,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private fun observeLiveData() {
         viewModel.loginLiveData.observe(viewLifecycleOwner) {
-            if (it != null) {
+            it?.doOnSuccess{
                 val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
                 findNavController().navigate(action)
-            } else {
+            }?.doOnFailure {
                 view?.showSnackBar("Check your email and password!")
             }
         }
