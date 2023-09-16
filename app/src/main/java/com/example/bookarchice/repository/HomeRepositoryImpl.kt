@@ -27,13 +27,15 @@ class HomeRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getBookList(): List<Book> {
+    override suspend fun getBookList(): AppResult<List<Book>> {
         val uid = auth.currentUser?.uid
-        return firebaseDataStore.collection(BookConstants.BOOKS)
-            .whereEqualTo("userId", uid)
-            .get()
-            .await()
-            .toObjects(Book::class.java)
+        return attempt {
+            firebaseDataStore.collection(BookConstants.BOOKS)
+                .whereEqualTo("userId", uid)
+                .get()
+                .await()
+                .toObjects(Book::class.java)
+        }
     }
 
     override suspend fun getSuggestionList(): List<SuggestionBook> {

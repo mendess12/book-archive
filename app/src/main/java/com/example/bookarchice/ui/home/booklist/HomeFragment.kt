@@ -82,11 +82,11 @@ class HomeFragment : Fragment() {
 
     private fun observeLiveData() {
         viewModel.booksLiveData.observe(viewLifecycleOwner) {
-            if (it != null) {
+            it?.doOnSuccess{
                 bookAdapter.updateData(it)
                 binding.recyclerView.adapter = bookAdapter
                 bookAdapter.notifyDataSetChanged()
-            } else {
+            }?.doOnFailure {
                 view?.showSnackBar("BookList is null")
             }
         }

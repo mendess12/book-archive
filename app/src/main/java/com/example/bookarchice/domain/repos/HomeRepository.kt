@@ -9,7 +9,7 @@ interface HomeRepository {
 
     suspend fun addBookData(book: Book): AppResult<DocumentReference>
 
-    suspend fun getBookList(): List<Book>
+    suspend fun getBookList(): AppResult<List<Book>>
 
     //TODO bunun icin use case
     suspend fun getSuggestionList(): List<SuggestionBook>
