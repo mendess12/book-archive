@@ -10,7 +10,8 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AuthRepositoryImpl @Inject constructor(private val firebaseAuth: FirebaseAuth) : AuthRepository {
+class AuthRepositoryImpl @Inject constructor(private val firebaseAuth: FirebaseAuth) :
+    AuthRepository {
 
     override suspend fun login(email: String, password: String): AppResult<AuthResult> {
         return attempt {
@@ -24,8 +25,10 @@ class AuthRepositoryImpl @Inject constructor(private val firebaseAuth: FirebaseA
         }
     }
 
-    override suspend fun forgotPassword(email: String) {
-        firebaseAuth.sendPasswordResetEmail(email).await()
+    override suspend fun forgotPassword(email: String): AppResult<Unit> {
+        return attempt {
+            firebaseAuth.sendPasswordResetEmail(email).await()
+        }
     }
 
     override suspend fun signOut() {

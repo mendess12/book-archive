@@ -68,10 +68,10 @@ class ForgotPasswordFragment : Fragment(R.layout.fragment_forgot_password) {
 
     private fun observeLiveData() {
         viewModel.forgotPasswordLiveData.observe(viewLifecycleOwner) {
-            if (it != null) {
+            it?.doOnSuccess {
                 view?.showSnackBar("Link sent to $email this email. Please check your email!")
                 findNavController().popBackStack()
-            } else {
+            }?.doOnFailure {
                 view?.showSnackBar("Check your email")
             }
         }

@@ -8,7 +8,7 @@ interface AuthRepository {
 
     suspend fun register(email: String, password: String): AppResult<AuthResult>
 
-    suspend fun forgotPassword(email: String)
+    suspend fun forgotPassword(email: String) :AppResult<Unit>
 
     suspend fun signOut()
 }
