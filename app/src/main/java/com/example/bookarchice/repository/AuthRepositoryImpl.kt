@@ -18,8 +18,10 @@ class AuthRepositoryImpl @Inject constructor(private val firebaseAuth: FirebaseA
         }
     }
 
-    override suspend fun register(email: String, password: String): AuthResult {
-        return firebaseAuth.createUserWithEmailAndPassword(email, password).await()
+    override suspend fun register(email: String, password: String): AppResult<AuthResult> {
+        return attempt {
+            firebaseAuth.createUserWithEmailAndPassword(email, password).await()
+        }
     }
 
     override suspend fun forgotPassword(email: String) {

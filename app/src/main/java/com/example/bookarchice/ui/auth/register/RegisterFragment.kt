@@ -87,9 +87,9 @@ class RegisterFragment : Fragment() {
 
     private fun observeLiveData() {
         viewModel.registerLiveData.observe(viewLifecycleOwner) {
-            if (it != null) {
+            it?.doOnSuccess{
                 findNavController().popBackStack()
-            } else {
+            }?.doOnFailure {
                 view?.showSnackBar("Check your email, password and user name!")
             }
         }
