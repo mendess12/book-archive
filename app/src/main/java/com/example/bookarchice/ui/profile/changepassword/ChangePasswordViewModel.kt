@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.bookarchice.databinding.FragmentChangePasswordBinding
 import com.example.bookarchice.domain.usecases.profile.ChangePasswordParams
 import com.example.bookarchice.domain.usecases.profile.ChangePasswordUseCase
+import com.example.bookarchice.util.AppResult
 import com.example.bookarchice.util.showSnackBar
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -16,7 +17,7 @@ import javax.inject.Inject
 class ChangePasswordViewModel @Inject constructor(private val changePasswordUseCase: ChangePasswordUseCase) :
     ViewModel() {
 
-    var changePasswordErrorLiveData = MutableLiveData<Throwable?>()
+    var changePasswordErrorLiveData = MutableLiveData<AppResult<Unit>>()
     private val message = "6 char password required"
 
     fun getChangePasswordDataFromRepository(
@@ -47,12 +48,9 @@ class ChangePasswordViewModel @Inject constructor(private val changePasswordUseC
         }
 
         viewModelScope.launch {
-            try {
-                changePasswordUseCase(ChangePasswordParams(password, newPassword))
-                changePasswordErrorLiveData.postValue(null)
-            } catch (ex: Exception) {
-                changePasswordErrorLiveData.postValue(ex)
-            }
+            val result = changePasswordUseCase(ChangePasswordParams(password, newPassword))
+            changePasswordErrorLiveData.postValue(result)
+
         }
     }
 }

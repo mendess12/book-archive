@@ -58,12 +58,12 @@ class ChangePasswordFragment : Fragment() {
 
     private fun observeLiveData() {
         viewModel.changePasswordErrorLiveData.observe(viewLifecycleOwner) {
-            if (it == null) {
+            it?.doOnSuccess {
                 val action =
                     ChangePasswordFragmentDirections.actionChangePasswordFragmentToLoginFragment()
                 findNavController().navigate(action)
                 auth.signOut()
-            } else {
+            }?.doOnFailure {
                 view?.showSnackBar("Check your password,new password and retype new password")
             }
         }
