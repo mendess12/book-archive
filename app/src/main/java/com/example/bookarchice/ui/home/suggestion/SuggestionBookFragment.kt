@@ -44,11 +44,11 @@ class SuggestionBookFragment : Fragment() {
 
     private fun observeLiveData() {
         viewModel.suggestionLiveData.observe(viewLifecycleOwner) {
-            if (it != null) {
+            it?.doOnSuccess {
                 suggestionAdapter = SuggestionAdapter(it)
                 binding.suggestionHomeRecyclerView.adapter = suggestionAdapter
                 suggestionAdapter.notifyDataSetChanged()
-            } else {
+            }?.doOnFailure {
                 view?.showSnackBar("BookList is null")
             }
         }

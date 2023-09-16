@@ -38,12 +38,12 @@ class HomeRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getSuggestionList(): List<SuggestionBook> {
-        return firebaseDataStore.collection(BookConstants.SUGGESTION)
-            .get()
-            .await()
-            .toObjects(SuggestionBook::class.java)
+    override suspend fun getSuggestionList(): AppResult<List<SuggestionBook>> {
+        return attempt {
+            firebaseDataStore.collection(BookConstants.SUGGESTION)
+                .get()
+                .await()
+                .toObjects(SuggestionBook::class.java)
+        }
     }
-
-
 }

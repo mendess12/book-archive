@@ -12,5 +12,5 @@ interface HomeRepository {
     suspend fun getBookList(): AppResult<List<Book>>
 
     //TODO bunun icin use case
-    suspend fun getSuggestionList(): List<SuggestionBook>
+    suspend fun getSuggestionList(): AppResult<List<SuggestionBook>>
 }
