@@ -3,7 +3,9 @@ package com.example.bookarchice.repository
 import com.example.bookarchice.domain.repos.HomeRepository
 import com.example.bookarchice.model.Book
 import com.example.bookarchice.model.SuggestionBook
+import com.example.bookarchice.util.AppResult
 import com.example.bookarchice.util.BookConstants
+import com.example.bookarchice.util.attempt
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -17,9 +19,12 @@ class HomeRepositoryImpl @Inject constructor(
     private val auth: FirebaseAuth
 ) : HomeRepository {
 
-    override suspend fun addBookData(book: Book): DocumentReference {
-        return firebaseDataStore.collection(BookConstants.BOOKS).add(book)
-            .await()
+    override suspend fun addBookData(book: Book): AppResult<DocumentReference> {
+        return attempt {
+            firebaseDataStore.collection(BookConstants.BOOKS)
+                .add(book)
+                .await()
+        }
     }
 
     override suspend fun getBookList(): List<Book> {

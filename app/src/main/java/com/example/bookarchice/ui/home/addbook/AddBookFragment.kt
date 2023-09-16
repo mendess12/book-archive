@@ -43,7 +43,7 @@ class AddBookFragment : Fragment() {
             }
         } else {
             binding.apply {
-                with(book){
+                with(book) {
                     addBookScreenBookName.setText(bookName.toString())
                     addBookScreenBookAuthor.setText(bookAuthor)
                     addBookScreenPageNumber.setText(pageNumber)
@@ -79,9 +79,9 @@ class AddBookFragment : Fragment() {
 
     private fun observeLiveData() {
         viewModel.addLiveData.observe(viewLifecycleOwner) {
-            if (it != null) {
+            it?.doOnSuccess {
                 findNavController().navigateUp()
-            } else {
+            }?.doOnFailure {
                 view?.showSnackBar("Failed!")
             }
         }
