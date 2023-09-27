@@ -1,4 +1,4 @@
-[suggesiton-video.webm](https://github.com/mendess12/book-archive/assets/76566952/2db1f232-28e6-44ad-b323-183b201c75c5)# book-archive
+# book-archive
 
 ### Konu
 <pre>Firebase Authentication ve Firestore database'lerini kullanıp <br>kullanıcıların uygulamaya kayıt olarak kitaplığındaki kitapları kayıt etme işlemleri</pre>
